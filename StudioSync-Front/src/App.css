@@ -1,1 +1,16 @@
+:root {
+    /* Light Mode Colors */
+    --primary-color: rgb(25, 130, 196);
+    --secondary-color: rgb(80, 184, 231);
+    --tertiary-color: rgb(53, 147, 162);
 
+    /* Dark Mode Colors */
+    --dark-primary-color: rgb(13, 66, 92);
+    --dark-secondary-color: rgb(24, 109, 150);
+    --dark-tertiary-color: rgb(15, 102, 114);
+
+    /* Default styling */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
