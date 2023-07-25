@@ -1,11 +1,10 @@
 import './App.css'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import Login from './Components/Login'
 import SignUp from './Components/SignUp'
 import Dashboard from './Components/Dashboard'
-import Nav from './Components/Nav'
-import Footer from './Components/Footer'
+import Prospects from './Components/Prospects'
 import Settings from './Components/Settings'
 import Calendar from './Components/Calendar'
 import axios from 'axios'
@@ -20,15 +19,29 @@ function App() {
   const navigate = useNavigate()
 
   return (
-      <div className='App'>
-        <Routes>
-          <Route exact path="/login" element={<Login />}/>
-          <Route exact path="/signup" element={<SignUp />}/>
-          <Route exact path="/dashboard" element={<Dashboard />}/>
-          <Route exact path="/calendar" element={<Calendar />}/>
-          <Route exact path="/settings" element={<Settings />}/>
-        </Routes>
-      </div>
+    <UserContext.Provider
+      value={{
+        isLoggedIn,
+        setIsLoggedIn,
+        currentUser,
+        setCurrentUser
+      }}
+    >
+    <div className='App'>
+      <Routes>
+        <Route exact path="/login" element={<Login />}/>
+        <Route exact path="/signup" element={<SignUp />}/>
+        <Route exact path="/dashboard" element={<Dashboard />}/>
+        <Route exact path="/calendar" element={<Calendar />}/>
+        <Route exact path="/prospects" element={<Prospects />}/>
+        <Route exact path="/settings" element={<Settings />}/>
+        <Route
+            path="/*"
+            element={<h1>404: Page Not Found</h1>}
+        />
+      </Routes>
+    </div>
+    </UserContext.Provider>
   )
 }
 

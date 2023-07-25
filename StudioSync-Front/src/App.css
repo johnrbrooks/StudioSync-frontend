@@ -1,16 +1,241 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,700;1,400&display=swap');
+
 :root {
     /* Light Mode Colors */
-    --primary-color: rgb(25, 130, 196);
-    --secondary-color: rgb(80, 184, 231);
-    --tertiary-color: rgb(53, 147, 162);
+    --primary-color: rgb(4, 0, 217);
+    --secondary-color: rgb(127, 219, 255);
+    --tertiary-color: rgb(221, 221, 221);
+
+    --unqualified-color: rgb(164, 0, 0);
+    --qualified-color: rgb(205, 133, 0);
+    --proposal-color: rgb(73, 213, 73);
+    --negotiation-color: rgb(0, 158, 0);
+    --closed-color: rgb(0, 97, 0);
+
+    --prospect-color: rgb(153, 212, 236);
+    --unlikely-color: rgb(143, 143, 255);
+    --possible-color: rgb(74, 74, 255);
+    --likely-color: rgb(4, 0, 217);
+    --won-color: rgb(0, 0, 106);
 
     /* Dark Mode Colors */
-    --dark-primary-color: rgb(13, 66, 92);
-    --dark-secondary-color: rgb(24, 109, 150);
-    --dark-tertiary-color: rgb(15, 102, 114);
+    --dark-primary-color: rgb(0, 31, 63);
+    --dark-secondary-color: rgb(0, 91, 150);
+    --dark-tertiary-color: rgb(85, 85, 85);
+}
 
-    /* Default styling */
+/* Default styling */
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
+.page-title {
+    margin: 2rem 0 2rem 6rem;
+    color: var(--primary-color)
+}
+
+body {
+    background-color: var(--tertiary-color);
+    font-family: 'Fira Sans', sans-serif;
+}
+
+/* NAV */
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pages {
+    width: 32%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.options {
+    width: 22%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.nav-item {
+    text-decoration: none;
+    padding: 1rem 0;
+    color: var(--primary-color);
+}
+
+.nav-item:hover {
+    border-bottom: solid var(--secondary-color) 3px;
+}
+
+.active {
+    border-bottom: solid var(--primary-color) 3px;
+}
+
+
+/* LOGIN PAGE */
+
+
+
+/* SIGNUP PAGE */
+
+
+
+
+/* DASHBOARD PAGE */
+
+.dashboard-page {
+    margin: 0 6rem;
+}
+
+.closed-page {
+    margin: 2rem 6rem 4rem 6rem;
+}
+
+.pipeline-title {
+    color: var(--primary-color);
+}
+
+.utilities-bar {
+    background-color: var(--tertiary-color);
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+.sort-label {
+    margin: 0 0.5rem;
+    padding: 0.25 0.75rem;
+}
+
+.sort-button {
+    padding: 0.25rem 0.75rem;
+    margin: 0 0.5rem;
+    background-color: var(--unlikely-color);
+    border-radius: 5px;
+}
+
+.sort-button:hover {
+    background-color: var(--prospect-color);
+    cursor: pointer;
+}
+
+.prospect-headers {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--secondary-color);
+    padding: 0.5rem 0;
+}
+
+.prospect-quick-details-headers,
+.prospect-quick-details {
+    width: 50%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+}
+
+.prospect-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border-left: solid var(--primary-color) 4px;
+    border-radius: 5px;
+    margin: 0.5rem 0;
+}
+
+.prospect-name {
+    margin-left: 1rem;
+}
+
+.prospect-quick-details {
+    padding: 0.5rem 0;
+}
+
+.quick-stage,
+.quick-probability {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 8rem;
+    height: 2.5rem;
+    border-radius: 5px;
+    color: var(--tertiary-color);
+    background-color: var(--dark-secondary-color);
+}
+
+.unqualified {
+    background-color: var(--unqualified-color);
+}
+
+.qualified {
+    background-color: var(--qualified-color);
+}
+
+.proposal {
+    background-color: var(--proposal-color);
+}
+
+.negotiation {
+    background-color: var(--negotiation-color);
+}
+
+.closed {
+    background-color: var(--closed-color);
+}
+
+.prospect {
+    background-color: var(--prospect-color);
+}
+
+.unlikely {
+    background-color: var(--unlikely-color);
+}
+
+.possible {
+    background-color: var(--possible-color);
+}
+
+.likely {
+    background-color: var(--likely-color);
+}
+
+.won {
+    background-color: var(--won-color);
+}
+
+.item-prospect {
+    border-left: solid var(--prospect-color) 4px;
+}
+
+.item-unlikely {
+    border-left: solid var(--unlikely-color) 4px;
+}
+
+.item-possible {
+    border-left: solid var(--possible-color) 4px;
+}
+
+.item-likely {
+    border-left: solid var(--likely-color) 4px;
+}
+
+.item-closed {
+    border-left: solid var(--closed-color) 4px;
+}
+
+/* CALENDAR PAGE */
+
+
+
+/* SETTINGS PAGE */

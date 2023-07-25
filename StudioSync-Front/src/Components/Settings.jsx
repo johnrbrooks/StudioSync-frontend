@@ -1,5 +1,13 @@
+import Nav from './Nav'
+
 export default function Settings() {
     return (
-        <h1>This is the Settings page</h1>
+        <div>
+            <h1 className='page-title'>Settings</h1>
+            <Nav />
+            <div className="settings-page">
+                
+            </div>
+        </div>
     )
 }

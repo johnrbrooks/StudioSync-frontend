@@ -1,5 +1,14 @@
+import Nav from './Nav'
+
 export default function Calendar() {
     return (
-        <h1>This is the Calendar page</h1>
+        <div>
+            <h1 className='page-title'>Calendar</h1>
+            <Nav />
+            <div className="dashboard-page">
+                    
+            </div>
+
+        </div>
     )
 }
