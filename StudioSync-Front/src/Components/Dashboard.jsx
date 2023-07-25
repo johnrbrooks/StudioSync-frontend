@@ -57,7 +57,7 @@ export default function Dashboard() {
             case 'Value':
                 return sortDirection === 'ascending' ? a.projected_value - b.projected_value : b.projected_value - a.projected_value;
             case 'Created':
-                return sortDirection === 'ascending' ? a.created_at.localeCompare(b.created_at) : b.created_at.localeCompare(a.created_at);
+                return sortDirection === 'ascending' ? a.createdAt.localeCompare(b.createdAt) : b.createdAt.localeCompare(a.createdAt);
             default:
                 return 0;
         }
@@ -75,7 +75,7 @@ export default function Dashboard() {
             case 'Value':
                 return sortDirection === 'ascending' ? a.projected_value - b.projected_value : b.projected_value - a.projected_value;
             case 'Created':
-                return sortDirection === 'ascending' ? a.created_at.localeCompare(b.created_at) : b.created_at.localeCompare(a.created_at);
+                return sortDirection === 'ascending' ? a.createdAt.localeCompare(b.createdAt) : b.createdAt.localeCompare(a.createdAt);
             default:
                 return 0;
         }
