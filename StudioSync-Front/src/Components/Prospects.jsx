@@ -69,6 +69,10 @@ export default function Prospects() {
         navigate(`/prospects/${prospect._id}`)
     }
 
+    const handleClick = () => {
+        navigate('/prospects/newprospect')
+    }
+
     return(
         <div>
             <h1 className='page-title'>Prospects</h1>
@@ -81,7 +85,7 @@ export default function Prospects() {
                     <div className="search-bar-container">
                         <input type="text" className="search-input" placeholder="Search Prospects..." value={searchQuery} onChange={handleChange}/>
                     </div>
-                    <button className="create-prospect">New</button>
+                    <button className="create-prospect" onClick={() => {handleClick()}}>New</button>
                 </div>
                 <div className="utilities-bar">
                     <h4 className='sort-label'>Sort By:</h4>

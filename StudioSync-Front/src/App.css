@@ -552,4 +552,62 @@ body {
     cursor: pointer;
 }
 
+/* NEW PROSPECT PAGE */
+.new-data-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    grid-gap: 2rem;
+    margin-bottom: 2rem;
+    width: 50%;
+}
+
+.information-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+}
+
+.new-data-value {
+    border: gray solid 2px;
+    padding: 0.25rem 0.5rem;
+    border-radius: 5px;
+    width: 70%;
+}
+
+.check-box-title {
+    margin-bottom: 1rem;
+}
+
+.check-boxes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    grid-gap: 0.25rem;
+}
+
+.check-box-label {
+    font-size: 0.75rem;
+    margin-left: 5px;
+}
+
+.check-box-item {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.option-box {
+    padding: 0.25rem 0.5rem;
+    width: 70%;
+}
+
+.prospect-form {
+    margin-bottom: 2rem;
+}
+
 /* SETTINGS PAGE */

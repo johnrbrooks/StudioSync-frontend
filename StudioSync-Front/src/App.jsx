@@ -8,6 +8,7 @@ import Prospects from './Components/Prospects'
 import Settings from './Components/Settings'
 import Calendar from './Components/Calendar'
 import ProspectItem from './Components/ProspectItem'
+import NewProspect from './Components/NewProspect'
 import axios from 'axios'
 
 export const UserContext = React.createContext(null)
@@ -52,6 +53,7 @@ function App() {
         <Route exact path="/prospects" element={<Prospects />}/>
         <Route exact path="/settings" element={<Settings />}/>
         <Route exact path="/prospects/:id" element={<ProspectItem />}/>
+        <Route exact path="/prospects/newprospect" element={<NewProspect />}/>
         <Route
             path="/*"
             element={<h1>404: Page Not Found</h1>}

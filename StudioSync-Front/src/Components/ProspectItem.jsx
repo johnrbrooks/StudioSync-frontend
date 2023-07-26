@@ -1,12 +1,13 @@
 import Nav from './Nav'
 import { useState, useEffect, useContext } from 'react'
 import { useParams } from 'react-router-dom'
-import { BASE_URL } from '../App'
+import { BASE_URL, UserContext } from '../App'
 import axios from 'axios'
 import moment from 'moment'
 
 
 export default function ProspectItem() {
+    const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn } = useContext(UserContext)
 
     const [prospect, setProspect] = useState()
     const key = useParams()
