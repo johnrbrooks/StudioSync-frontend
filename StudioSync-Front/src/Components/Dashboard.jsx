@@ -18,7 +18,7 @@ export default function Dashboard() {
 
     useEffect(() => {
         const getProspects = async() => {
-            const response = await axios.get(`${BASE_URL}/prospects/get/all`)
+            const response = await axios.get(`${BASE_URL}/prospects/get/userprospects/${currentUser._id}`)
             setProspects(response.data)
         }
         getProspects()
@@ -109,8 +109,13 @@ export default function Dashboard() {
                         <p className='quick-created-header'>Created</p>
                     </div>
                 </div>
-                {sortedProspects ? (
-                    sortedProspects.length > 0 ? (
+                {sortedProspects === undefined ? (
+                    <div className="prospect-item">
+                        <div className="prospect-name">
+                            <h2>Loading...</h2>
+                        </div>
+                    </div>
+                ) : sortedProspects.length > 0 ? (
                         sortedProspects.map((prospect) => (
                         <div className={`prospect-item ${prospect.probability === 0 ? 'item-prospect' : prospect.probability === 30 ? 'item-unlikely' : prospect.probability === 50 ? 'item-possible' : prospect.probability === 90 ? 'item-likely' : prospect.probability === 100 ? 'item-closed' : ''}`} key={prospect._id} onClick={() => handleSelection(prospect)}>
                             <div className="prospect-name">
@@ -126,13 +131,6 @@ export default function Dashboard() {
                             </div>
                         </div>)
                         )
-                    ) : (
-                        <div className="prospect-item">
-                            <div className="prospect-name">
-                                <h2>Loading...</h2>
-                            </div>
-                        </div>
-                        ) 
                     ) : (
                         <div className="prospect-item">
                             <div className="prospect-name">
@@ -160,8 +158,13 @@ export default function Dashboard() {
                         <p className='quick-created-header'>Created</p>
                     </div>
                 </div>
-                {sortedClosedProspects ? (
-                    sortedClosedProspects.length > 0 ? (
+                {sortedClosedProspects === undefined ? (
+                        <div className="prospect-item">
+                            <div className="prospect-name">
+                                <h2>Loading...</h2>
+                            </div>
+                        </div>
+                    ) : sortedClosedProspects.length > 0 ? (
                         sortedClosedProspects.map((prospect) => (
                         <div className={`prospect-item ${prospect.probability === 0 ? 'item-prospect' : prospect.probability === 30 ? 'item-unlikely' : prospect.probability === 50 ? 'item-possible' : prospect.probability === 90 ? 'item-likely' : prospect.probability === 100 ? 'item-closed' : ''}`} key={prospect.id} onClick={() => handleSelection(prospect)}>
                             <div className="prospect-name">
@@ -177,13 +180,6 @@ export default function Dashboard() {
                             </div>
                         </div>)
                         )
-                    ) : (
-                        <div className="prospect-item">
-                            <div className="prospect-name">
-                                <h2>Loading...</h2>
-                            </div>
-                        </div>
-                        ) 
                     ) : (
                         <div className="prospect-item">
                             <div className="prospect-name">

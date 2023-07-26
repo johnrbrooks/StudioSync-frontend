@@ -32,7 +32,6 @@ export default function Login() {
         e.preventDefault()
         console.log(formState)
         let foundUser = await getUser()
-        console.log(foundUser)
         if(foundUser && foundUser.password === formState.password) {
             setSuccess(true)
             setIsLoggedIn(true)

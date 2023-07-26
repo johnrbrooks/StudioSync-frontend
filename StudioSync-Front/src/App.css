@@ -74,6 +74,17 @@ body {
     border-bottom: solid var(--secondary-color) 3px;
 }
 
+.log-out {
+    border: none;
+    background-color: var(--tertiary-color);
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 1rem;
+}
+
+.log-out:hover {
+    cursor: pointer;
+}
+
 .active {
     border-bottom: solid var(--primary-color) 3px;
 }

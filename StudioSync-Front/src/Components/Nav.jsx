@@ -1,14 +1,29 @@
-import { Link, useLocation } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useState, useEffect, useContext } from 'react'
+import { UserContext } from '../App'
+import ReactLoading from 'react-loading'
 
 export default function Nav() {
+    const { users, setUsers, isLoggedIn, setIsLoggedIn, setCurrentUser } = useContext(UserContext)
 
     const [isActive, setIsActive] = useState('Dashboard')
+    const [isLoggingOut, setIsLoggingOut] = useState(false)
     const location = useLocation()
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         setIsActive(location.pathname)
     }, [location.pathname])
+
+    const handleLogOut = () => {
+        setIsLoggingOut(true)
+        setIsLoggedIn(false)
+        setCurrentUser(null)
+        setTimeout(() => {
+            navigate('/login')
+        }, 2000)
+    }
 
     return (
         <div className="nav">
@@ -19,7 +34,11 @@ export default function Nav() {
             </div>
             <div className="options">
                 <Link to="/settings" className={`nav-item ${isActive === '/settings' ? 'active' : ''}`}>Settings</Link>
-                <Link to="/login" className="nav-item">Log Out</Link>
+                {isLoggingOut ? (
+                    <ReactLoading type="bars" color="#0400D9" height={50} width={50} />
+                ) : (
+                    <button to="/login" className="nav-item log-out" onClick={() => handleLogOut()}>Log Out</button>
+                )}
             </div>
         </div>
     )

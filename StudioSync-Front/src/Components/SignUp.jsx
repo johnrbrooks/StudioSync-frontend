@@ -70,13 +70,13 @@ export default function SignUp() {
             <div className="login-container">
                 <h1 className='form-title'>StudioSync</h1> 
                 <h3 className='form-subtitle'>Create an Account below</h3>
-                <form className="signup-form">
+                <form className="signup-form" onSubmit={handleSubmit}>
                     <input type="text" placeholder='Name' className='name-input' id='name' onChange={handleChange} value={formState.name}/>
                     <input type="text" placeholder='Username' className='username-input' id='username' onChange={handleChange} value={formState.username}/>
                     <input type="password" placeholder='Password' className='password-input' id='password' onChange={handleChange} value={formState.password}/>
                     <input type="password" placeholder='Confirm Password' className='password-input2' id='confirmpassword' onChange={handleChange} value={formState.confirmpassword}/>
                     <p className="error-message">{message}</p>
-                    <button className="login-button" type='submit' onSubmit={handleSubmit}>Create Account</button>
+                    <button className="login-button" type='submit'>Create Account</button>
                 </form>
             </div>
         </div>

@@ -17,11 +17,11 @@ export default function Prospects() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        const getProspects = async () => {
-            const response = await axios.get(`${BASE_URL}/prospects/get/all`)
+        const getAllProspects = async() => {
+            const response = await axios.get(`${BASE_URL}/prospects/get/userprospects/${currentUser._id}`)
             setAllProspects(response.data)
         }
-        getProspects()
+        getAllProspects()
     }, [])
 
     useEffect(() => {
@@ -91,8 +91,13 @@ export default function Prospects() {
                     <p className='sort-button' onClick={() => handleSort('Value')}>Value</p>
                     <p className='sort-button' onClick={() => handleSort('Created')}>Created</p>
                 </div>
-                {sortedProspects ? (
-                        sortedProspects.length > 0 ? (
+                {sortedProspects === undefined ? (
+                        <div className="prospect-item">
+                            <div className="prospect-name">
+                                <h2>Loading...</h2>
+                            </div>
+                        </div>
+                    ) : sortedProspects.length > 0 ? (
                             sortedProspects.map((prospect) => (
                             <div className={`prospect-item ${prospect.probability === 0 ? 'item-prospect' : prospect.probability === 30 ? 'item-unlikely' : prospect.probability === 50 ? 'item-possible' : prospect.probability === 90 ? 'item-likely' : prospect.probability === 100 ? 'item-closed' : ''}`} key={prospect._id} onClick={() => handleSelection(prospect)}>
                                 <div className="prospect-name">
@@ -108,13 +113,6 @@ export default function Prospects() {
                                 </div>
                             </div>)
                             )
-                        ) : (
-                            <div className="prospect-item">
-                                <div className="prospect-name">
-                                    <h2>Loading...</h2>
-                                </div>
-                            </div>
-                            ) 
                         ) : (
                             <div className="prospect-item">
                                 <div className="prospect-name">
