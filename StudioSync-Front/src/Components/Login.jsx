@@ -30,7 +30,6 @@ export default function Login() {
 
     const handleSubmit = async(e) => {
         e.preventDefault()
-        console.log(formState)
         let foundUser = await getUser()
         if(foundUser && foundUser.password === formState.password) {
             setSuccess(true)

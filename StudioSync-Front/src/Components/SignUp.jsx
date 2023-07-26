@@ -28,12 +28,12 @@ export default function SignUp() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
         if(users.filter((user) => user.username === formState.username.toLowerCase()).length > 0) {
             setMessage('Account with that username already exists!')
         } else if (formState.password === formState.confirmpassword) {
             try {
                 let newUser = await createUser()
+                console.log(newUser)
                 setSuccess(true)
                 setIsLoggedIn(true)
                 setCurrentUser(newUser)
@@ -56,7 +56,7 @@ export default function SignUp() {
             pipeline: [],
             mode: true,
         })
-        return user
+        return user.data
     }
 
     return success ? (

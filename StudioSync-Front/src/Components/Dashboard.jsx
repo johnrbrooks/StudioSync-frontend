@@ -16,6 +16,8 @@ export default function Dashboard() {
 
     const navigate = useNavigate()
 
+    console.log(currentUser)
+
     useEffect(() => {
         const getProspects = async() => {
             const response = await axios.get(`${BASE_URL}/prospects/get/userprospects/${currentUser._id}`)
