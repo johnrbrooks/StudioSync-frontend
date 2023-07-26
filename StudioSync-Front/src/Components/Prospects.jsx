@@ -81,6 +81,7 @@ export default function Prospects() {
                     <div className="search-bar-container">
                         <input type="text" className="search-input" placeholder="Search Prospects..." value={searchQuery} onChange={handleChange}/>
                     </div>
+                    <button className="create-prospect">New</button>
                 </div>
                 <div className="utilities-bar">
                     <h4 className='sort-label'>Sort By:</h4>
