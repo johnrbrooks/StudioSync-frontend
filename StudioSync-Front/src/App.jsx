@@ -7,6 +7,7 @@ import Dashboard from './Components/Dashboard'
 import Prospects from './Components/Prospects'
 import Settings from './Components/Settings'
 import Calendar from './Components/Calendar'
+import ProspectItem from './Components/ProspectItem'
 import axios from 'axios'
 
 export const UserContext = React.createContext(null)
@@ -35,6 +36,7 @@ function App() {
         <Route exact path="/calendar" element={<Calendar />}/>
         <Route exact path="/prospects" element={<Prospects />}/>
         <Route exact path="/settings" element={<Settings />}/>
+        <Route exact path="/prospects/:id" element={<ProspectItem />}/>
         <Route
             path="/*"
             element={<h1>404: Page Not Found</h1>}

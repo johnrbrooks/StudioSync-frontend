@@ -11,9 +11,10 @@ export default function Prospects() {
     const [searchQuery, setSearchQuery] = useState('')
     const [searchResults, setSearchResults] = useState([])
     const [allProspects, setAllProspects] = useState([])
-    const [errorMessage, setErrorMessage] = useState('')
     const [sortType, setSortType] = useState('ABC')
     const [sortDirection, setSortDirection] = useState('ascending')
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         const getProspects = async () => {
@@ -40,26 +41,8 @@ export default function Prospects() {
         }
     }
 
-    const handleSearch = async() => {
-        if(searchQuery !== '') {
-            const filteredResults = allProspects.filter((result) => 
-            result.contact_name.toLowerCase().includes(searchQuery.toLowerCase())
-            )
-            setSearchResults(filteredResults)
-        } else {
-            setErrorMessage('You have not entered anything to search.')
-        }
-    }
-
     const handleChange = (e) => {
         setSearchQuery(e.target.value)
-        setErrorMessage('')
-    }
-
-    const handleKeyPress = (event) => {
-        if(event.key === 'Enter') {
-            handleSearch()
-        }
     }
 
     const sortedProspects = searchResults.slice().sort((a, b) => {
@@ -82,6 +65,10 @@ export default function Prospects() {
         }
     })
 
+    const handleSelection = (prospect) => {
+        navigate(`/prospects/${prospect._id}`)
+    }
+
     return(
         <div>
             <h1 className='page-title'>Prospects</h1>
@@ -92,11 +79,7 @@ export default function Prospects() {
                 </div>
                 <div className="search-bar">
                     <div className="search-bar-container">
-                        <input type="text" className="search-input" placeholder="Search Prospects..." value={searchQuery} onChange={handleChange} onKeyPress={handleKeyPress}/>
-                        <button className="search-button" onClick={handleSearch}>Search</button>
-                    </div>
-                    <div className="search-error">
-                        <p className='error-message'>{errorMessage}</p>
+                        <input type="text" className="search-input" placeholder="Search Prospects..." value={searchQuery} onChange={handleChange}/>
                     </div>
                 </div>
                 <div className="utilities-bar">
@@ -110,7 +93,7 @@ export default function Prospects() {
                 {sortedProspects ? (
                         sortedProspects.length > 0 ? (
                             sortedProspects.map((prospect) => (
-                            <div className={`prospect-item ${prospect.probability === 0 ? 'item-prospect' : prospect.probability === 30 ? 'item-unlikely' : prospect.probability === 50 ? 'item-possible' : prospect.probability === 90 ? 'item-likely' : prospect.probability === 100 ? 'item-closed' : ''}`} key={prospect.id}>
+                            <div className={`prospect-item ${prospect.probability === 0 ? 'item-prospect' : prospect.probability === 30 ? 'item-unlikely' : prospect.probability === 50 ? 'item-possible' : prospect.probability === 90 ? 'item-likely' : prospect.probability === 100 ? 'item-closed' : ''}`} key={prospect._id} onClick={() => handleSelection(prospect)}>
                                 <div className="prospect-name">
                                     <h3>{prospect.contact_name}</h3>
                                 </div>

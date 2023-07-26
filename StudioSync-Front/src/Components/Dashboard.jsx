@@ -1,6 +1,7 @@
 import Nav from './Nav'
 import { useState, useEffect, useContext } from 'react'
 import { UserContext, BASE_URL } from '../App'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import moment from 'moment'
 
@@ -12,6 +13,8 @@ export default function Dashboard() {
     const [openProspects, setOpenProspects] = useState([])
     const [sortType, setSortType] = useState('ABC')
     const [sortDirection, setSortDirection] = useState('ascending')
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         const getProspects = async() => {
@@ -77,6 +80,10 @@ export default function Dashboard() {
         }
     });
 
+    const handleSelection = (prospect) => {
+        navigate(`/prospects/${prospect._id}`)
+    }
+
     return (
         <div>
             <h1 className='page-title'>Dashboard</h1>
@@ -105,7 +112,7 @@ export default function Dashboard() {
                 {sortedProspects ? (
                     sortedProspects.length > 0 ? (
                         sortedProspects.map((prospect) => (
-                        <div className={`prospect-item ${prospect.probability === 0 ? 'item-prospect' : prospect.probability === 30 ? 'item-unlikely' : prospect.probability === 50 ? 'item-possible' : prospect.probability === 90 ? 'item-likely' : prospect.probability === 100 ? 'item-closed' : ''}`} key={prospect.id}>
+                        <div className={`prospect-item ${prospect.probability === 0 ? 'item-prospect' : prospect.probability === 30 ? 'item-unlikely' : prospect.probability === 50 ? 'item-possible' : prospect.probability === 90 ? 'item-likely' : prospect.probability === 100 ? 'item-closed' : ''}`} key={prospect._id} onClick={() => handleSelection(prospect)}>
                             <div className="prospect-name">
                                 <h3>{prospect.contact_name}</h3>
                             </div>
@@ -156,7 +163,7 @@ export default function Dashboard() {
                 {sortedClosedProspects ? (
                     sortedClosedProspects.length > 0 ? (
                         sortedClosedProspects.map((prospect) => (
-                        <div className={`prospect-item ${prospect.probability === 0 ? 'item-prospect' : prospect.probability === 30 ? 'item-unlikely' : prospect.probability === 50 ? 'item-possible' : prospect.probability === 90 ? 'item-likely' : prospect.probability === 100 ? 'item-closed' : ''}`} key={prospect.id}>
+                        <div className={`prospect-item ${prospect.probability === 0 ? 'item-prospect' : prospect.probability === 30 ? 'item-unlikely' : prospect.probability === 50 ? 'item-possible' : prospect.probability === 90 ? 'item-likely' : prospect.probability === 100 ? 'item-closed' : ''}`} key={prospect.id} onClick={() => handleSelection(prospect)}>
                             <div className="prospect-name">
                                 <h3>{prospect.contact_name}</h3>
                             </div>

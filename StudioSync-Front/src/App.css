@@ -98,6 +98,10 @@ body {
     margin: 2rem 6rem 4rem 6rem;
 }
 
+.prospect-settings-page {
+    margin: 2rem 6rem;
+}
+
 .pipeline-title {
     color: var(--primary-color);
 }
@@ -118,12 +122,12 @@ body {
 .sort-button {
     padding: 0.25rem 0.75rem;
     margin: 0 0.5rem;
-    background-color: var(--unlikely-color);
+    background-color: rgb(212, 212, 212);
     border-radius: 5px;
 }
 
 .sort-button:hover {
-    background-color: var(--prospect-color);
+    background-color: var(--secondary-color);
     cursor: pointer;
 }
 
@@ -210,6 +214,11 @@ body {
     border-left: solid var(--primary-color) 4px;
     border-radius: 5px;
     margin: 0.5rem 0;
+}
+
+.prospect-item:hover {
+    cursor: pointer;
+    background-color: rgb(212, 212, 212);
 }
 
 .prospect-name {
@@ -309,7 +318,9 @@ body {
 }
 
 .prospect-settings-title {
-    margin-left: 1rem;
+    background-color: var(--secondary-color);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
 }
 
 .search-bar {
@@ -352,6 +363,82 @@ body {
 .error-message {
     color: red;
     margin-top: 1rem;
+}
+
+/* PROSPECT SETTINGS PAGE */
+
+.prospect-settings-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.prospect-settings-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(169, 169, 169, 0.3);
+    border-radius: 5px;
+    width: 100%;
+}
+
+.prospect-settings-headers {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 0; 
+    width: 100%;
+    padding: 0 1rem;
+}
+
+.prospect-settings-header {
+    font-size: 2rem;
+}
+
+.update-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.edit-prospect-button {
+    padding: 0.3rem 1.1rem;
+    border-radius: 5px;
+    border: none;
+}
+
+.data-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    grid-gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.data-value {
+    border: gray solid 2px;
+    padding: 0.25rem 0.5rem;
+    border-radius: 5px;
+}
+
+.edit-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.update-value {
+    padding: 0.25rem 1.5rem;
+    border-radius: 5px;
+    border: var(--primary-color) solid 2px;
+}
+
+.update-value:hover {
+    cursor: pointer;
 }
 
 /* SETTINGS PAGE */
