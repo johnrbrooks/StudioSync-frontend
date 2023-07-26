@@ -39,7 +39,7 @@ export default function Dashboard() {
             setSortType(newSortType);
             setSortDirection('ascending');
         }
-    };
+    }
 
     const sortedProspects = openProspects.slice().sort((a, b) => {
         if(openProspects.length < 2) {
@@ -48,8 +48,6 @@ export default function Dashboard() {
         switch (sortType) {
             case 'ABC':
                 return sortDirection === 'ascending' ? a.contact_name.localeCompare(b.contact_name) : b.contact_name.localeCompare(a.contact_name);
-            case 'ZYX':
-                return sortDirection === 'ascending' ? b.contact_name.localeCompare(a.contact_name) : a.contact_name.localeCompare(b.contact_name);
             case 'Stage':
                 return sortDirection === 'ascending' ? a.stage.localeCompare(b.stage) : b.stage.localeCompare(a.stage);
             case 'Probability':
@@ -70,8 +68,6 @@ export default function Dashboard() {
         switch (sortType) {
             case 'ABC':
                 return sortDirection === 'ascending' ? a.contact_name.localeCompare(b.contact_name) : b.contact_name.localeCompare(a.contact_name);
-            case 'ZYX':
-                return sortDirection === 'ascending' ? b.contact_name.localeCompare(a.contact_name) : a.contact_name.localeCompare(b.contact_name);
             case 'Value':
                 return sortDirection === 'ascending' ? a.projected_value - b.projected_value : b.projected_value - a.projected_value;
             case 'Created':
@@ -89,7 +85,6 @@ export default function Dashboard() {
                 <div className="utilities-bar">
                     <h4 className='sort-label'>Sort By:</h4>
                     <p className='sort-button' onClick={() => handleSort('ABC')}>ABC</p>
-                    <p className='sort-button' onClick={() => handleSort('ZYX')}>ZYX</p>
                     <p className='sort-button' onClick={() => handleSort('Stage')}>Stage</p>
                     <p className='sort-button' onClick={() => handleSort('Probability')}>Probability</p>
                     <p className='sort-button' onClick={() => handleSort('Value')}>Value</p>
@@ -143,7 +138,6 @@ export default function Dashboard() {
                 <div className="utilities-bar">
                     <h4 className='sort-label'>Sort By:</h4>
                     <p className='sort-button' onClick={() => handleSort('ABC')}>ABC</p>
-                    <p className='sort-button' onClick={() => handleSort('ZYX')}>ZYX</p>
                     <p className='sort-button' onClick={() => handleSort('Value')}>Value</p>
                     <p className='sort-button' onClick={() => handleSort('Created')}>Created</p>
                 </div>
