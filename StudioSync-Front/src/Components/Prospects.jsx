@@ -121,7 +121,8 @@ export default function Prospects() {
                                     <h2>No prospects found.</h2>
                                 </div>
                             </div>
-                        )}
+                        )
+                    }
             </div>
         </div>
     )

@@ -16,12 +16,27 @@ export const BASE_URL = `https://studiosync-backend-production.up.railway.app/ap
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [currentUser, setCurrentUser] = useState(null)
+  const [users, setUsers] = useState(null)
 
   const navigate = useNavigate()
+
+  useEffect(() => {
+    const getAllUsers = async () => {
+      try {
+        let response = await axios.get(`${BASE_URL}/users/get/all`);
+        setUsers(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getAllUsers()
+  }, [])
 
   return (
     <UserContext.Provider
       value={{
+        users,
+        setUsers,
         isLoggedIn,
         setIsLoggedIn,
         currentUser,

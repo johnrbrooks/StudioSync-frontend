@@ -81,6 +81,92 @@ body {
 
 /* LOGIN PAGE */
 
+.login-body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('https://www.eastweststudios.com/_images/centerstage_studio-1-control_1@2x.jpg');
+    background-size: cover;
+    background-color: rgb(68, 68, 68);
+    background-blend-mode: multiply;
+}
+
+.login-container {
+    text-align: center;
+    width: 20%;
+    border-radius: 5px;
+    padding: 2.5rem 1.5rem;
+    box-shadow:0 8px 20px rgba(0, 0, 0, 0.6);
+    background-color: var(--tertiary-color);
+}
+
+.form-subtitle {
+    margin: 1.5rem 0;
+}
+
+.username-input,
+.password-input,
+.name-input,
+.password-input2 {
+    padding: 0.75rem 0.75rem;
+    width: 65%;
+    border-radius: 5px;
+    border: 1px gray solid;
+}
+
+.name-input {
+    margin: 1rem 0; 
+}
+
+.password-input {
+    margin: 1rem 0;
+}
+
+.login-button {
+    padding: 0.75rem 5.5rem;
+    margin-top: 1.5rem;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    color: white;
+    font-family: 'Fira Sans', sans-serif;
+    border: none;
+}
+
+.login-button:hover {
+    background-color: var(--unlikely-color);
+}
+
+.inquiry-note {
+    margin: 1rem 0;
+}
+
+.create-account-button {
+    padding: 0.5rem 3.2rem;
+    border-radius: 5px;
+    color: white;
+    font-family: 'Fira Sans', sans-serif;
+    border: solid var(--primary-color) 2px;
+    color: black;
+}
+
+.create-account-button:hover {
+    color: white;
+    background-color: var(--primary-color)
+}
+
+.login-button:hover,
+.create-account-button:hover {
+    cursor: pointer;
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 
 /* SIGNUP PAGE */
