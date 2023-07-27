@@ -6,9 +6,8 @@ import axios from 'axios'
 import moment from 'moment'
 
 export default function Dashboard() {
-    const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn } = useContext(UserContext)
+    const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, userProspects, setUserProspects, allProspects, setAllProspects } = useContext(UserContext)
 
-    const [prospects, setProspects] = useState([])
     const [closedProspects, setClosedProspects] = useState([])
     const [openProspects, setOpenProspects] = useState([])
     const [sortType, setSortType] = useState('ABC')
@@ -16,33 +15,40 @@ export default function Dashboard() {
 
     const navigate = useNavigate()
 
-    console.log(currentUser)
-
     useEffect(() => {
         const getProspects = async() => {
             const response = await axios.get(`${BASE_URL}/prospects/get/userprospects/${currentUser._id}`)
-            setProspects(response.data)
+            setUserProspects(response.data)
         }
         getProspects()
     }, [])
 
     useEffect(() => {
-        const closedProspects = prospects.filter(
-            (prospect) => prospect.stage === 'Closed'
-        )
-        setClosedProspects(closedProspects)
-        const openProspects = prospects.filter(
-            (prospect) => prospect.stage !== 'Closed'
-        )
-        setOpenProspects(openProspects)
-    }, [prospects])
+        const fetchProspectDetails = async () => {
+          if (userProspects.length === 0) return
+    
+          try {
+            const prospectDetails = await Promise.all(userProspects.map((prospectId) => axios.get(`${BASE_URL}/prospects/get/${prospectId}`)))
+            const prospectData = prospectDetails.map((response) => response.data)
+            setAllProspects(prospectData)
+            const openProspects = prospectData.filter((prospect) => prospect.stage !== 'Closed')
+            const closedProspects = prospectData.filter((prospect) => prospect.stage === 'Closed')
+            setOpenProspects(openProspects)
+            setClosedProspects(closedProspects)
+          } catch (error) {
+            console.error('Error fetching prospect details:', error)
+          }
+        }
+    
+        fetchProspectDetails()
+      }, [userProspects])
 
     const handleSort = (newSortType) => {
         if (newSortType === sortType) {
-            setSortDirection(sortDirection === 'ascending' ? 'descending' : 'ascending');
+            setSortDirection(sortDirection === 'ascending' ? 'descending' : 'ascending')
         } else {
-            setSortType(newSortType);
-            setSortDirection('ascending');
+            setSortType(newSortType)
+            setSortDirection('ascending')
         }
     }
 

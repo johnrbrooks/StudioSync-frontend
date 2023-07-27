@@ -6,23 +6,14 @@ import axios from 'axios'
 import moment from 'moment'
 
 export default function Prospects() {
-    const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn } = useContext(UserContext)
+    const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, userProspects, setUserProspects, allProspects, setAllProspects } = useContext(UserContext)
 
     const [searchQuery, setSearchQuery] = useState('')
     const [searchResults, setSearchResults] = useState([])
-    const [allProspects, setAllProspects] = useState([])
     const [sortType, setSortType] = useState('ABC')
     const [sortDirection, setSortDirection] = useState('ascending')
 
     const navigate = useNavigate()
-
-    useEffect(() => {
-        const getAllProspects = async() => {
-            const response = await axios.get(`${BASE_URL}/prospects/get/userprospects/${currentUser._id}`)
-            setAllProspects(response.data)
-        }
-        getAllProspects()
-    }, [])
 
     useEffect(() => {
         const filteredResults = allProspects.filter(
@@ -30,7 +21,31 @@ export default function Prospects() {
                 result.contact_name.toLowerCase().includes(searchQuery.toLowerCase())
         )
         setSearchResults(filteredResults)
-    }, [searchQuery, allProspects])
+    }, [searchQuery])
+
+    useEffect(() => {
+        const getProspects = async() => {
+            const response = await axios.get(`${BASE_URL}/prospects/get/userprospects/${currentUser._id}`)
+            setUserProspects(response.data)
+        }
+        getProspects()
+    }, [currentUser])
+
+    useEffect(() => {
+        const fetchProspectDetails = async () => {
+          if (userProspects.length === 0) return
+    
+          try {
+            const prospectDetails = await Promise.all(userProspects.map((prospectId) => axios.get(`${BASE_URL}/prospects/get/${prospectId}`)))
+            const prospectData = prospectDetails.map((response) => response.data)
+            setAllProspects(prospectData)
+          } catch (error) {
+            console.error('Error fetching prospect details:', error)
+          }
+        }
+    
+        fetchProspectDetails()
+      }, [userProspects, currentUser])
 
     const handleSort = (newSortType) => {
         if (newSortType === sortType) {

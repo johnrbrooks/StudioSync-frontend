@@ -18,6 +18,8 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [currentUser, setCurrentUser] = useState(null)
   const [users, setUsers] = useState(null)
+  const [userProspects, setUserProspects] = useState([])
+  const [allProspects, setAllProspects] = useState([])
 
   const navigate = useNavigate()
 
@@ -37,6 +39,10 @@ function App() {
     <UserContext.Provider
       value={{
         users,
+        userProspects,
+        setUserProspects,
+        allProspects,
+        setAllProspects,
         setUsers,
         isLoggedIn,
         setIsLoggedIn,

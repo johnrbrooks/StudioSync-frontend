@@ -476,6 +476,16 @@ body {
     margin-top: 1rem;
 }
 
+.error-message2 {
+    color: red;
+    margin: 1rem 0;
+}
+
+.success-message {
+    color: rgb(0, 200, 0);
+    margin: 1rem 0;
+}
+
 /* PROSPECT SETTINGS PAGE */
 
 .prospect-settings-container {

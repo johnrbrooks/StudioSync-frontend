@@ -1,9 +1,10 @@
 import Nav from './Nav'
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext, useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import { BASE_URL, UserContext } from '../App'
 import axios from 'axios'
 import moment from 'moment'
+import ReactLoading from 'react-loading'
 
 export default function NewProspect() {
     const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn } = useContext(UserContext)
@@ -13,23 +14,27 @@ export default function NewProspect() {
         contact_name: '',
         email: '',
         phone: '',
-        stage: 'Unqualified',
+        stage: '',
         probability: 0,
-        projected_value: '',
+        projected_value: 0,
         interested_services: [],
         next_follow_up: '',
         notes: '',
     })
 
+    const [success, setSuccess] = useState(false)
+    const [successMessage, setSuccessMessage] = useState('')
     const [errorMessage, setErrorMessage] = useState('')
+    const formRef = useRef(null)
 
     const handleChange = (e) => {
+        setErrorMessage('')
         const { name, value, type, checked } = e.target
         if(type === 'checkbox') {
             if(checked) {
                 setFormData((prevFormData) => ({
                     ...prevFormData,
-                    interested_services_services: [...prevFormData.interested_services, value]
+                    interested_services: [...prevFormData.interested_services, value]
                 }))
             } else {
                 setFormData((prevFormData) => ({
@@ -48,7 +53,6 @@ export default function NewProspect() {
     const createProspect = (e) => {
         e.preventDefault()
         setErrorMessage('')
-        console.log(formData)
 
         const requiredFields = ['contact_name', 'email', 'phone', 'stage', 'probability', 'projected_value']
 
@@ -65,6 +69,26 @@ export default function NewProspect() {
                     console.error('Error creating prospect:', error)
                 }
             }
+            addProspect()
+            setSuccess(true)
+            setSuccessMessage('Creating prospect...')
+            setTimeout(() => {
+                setSuccess(false)
+                setSuccessMessage('')
+                formRef.current.reset()
+                setFormData({
+                    user_pipeline: currentUser._id,
+                    contact_name: '',
+                    email: '',
+                    phone: '',
+                    stage: '',
+                    probability: 0,
+                    projected_value: 0,
+                    interested_services: [],
+                    next_follow_up: '',
+                    notes: '',
+                })
+            }, 2000)
         }
     }
 
@@ -79,16 +103,17 @@ export default function NewProspect() {
                         <div className="prospect-settings-headers">
                             <h2 className="prospect-settings-header">Customer Information</h2>
                         </div>
-                        <form action="" onSubmit={createProspect} className="information-form">
+                        <form action="" ref={formRef} onSubmit={createProspect} className="information-form">
                             <div className="new-data-grid">
                                 <h3 className="data-title">Name:<span className='required'> *</span></h3>
-                                <input type="text" className='new-data-value' placeholder='John Doe' onChange={handleChange}/>
+                                <input type="text" className='new-data-value' placeholder='John Doe' name='contact_name' onChange={handleChange}/>
                                 <h3 className="data-title">Email:<span className='required'> *</span></h3>
-                                <input type="text" className='new-data-value' placeholder='John@johndoe.com' onChange={handleChange}/>
+                                <input type="text" className='new-data-value' placeholder='John@johndoe.com' name='email' onChange={handleChange}/>
                                 <h3 className="data-title">Phone:<span className='required'> *</span></h3>
-                                <input type="text" className='new-data-value' placeholder='111-111-1111' onChange={handleChange}/>
+                                <input type="text" className='new-data-value' placeholder='111-111-1111' name='phone'onChange={handleChange}/>
                                 <h3 className="data-title">Stage:<span className='required'> *</span></h3>
                                 <select name="stage" id="stage" className='option-box' onChange={handleChange}>
+                                    <option></option>
                                     <option value="Unqualified">Unqualified</option>
                                     <option value="Qualified">Qualified</option>
                                     <option value="Proposal">Proposal</option>
@@ -96,15 +121,16 @@ export default function NewProspect() {
                                     <option value="Closed">Closed</option>
                                 </select>
                                 <h3 className="data-title">Probability:<span className='required'> *</span></h3>
-                                <select name="stage" id="stage" className='option-box' onChange={handleChange}>
-                                    <option value="Unqualified">0</option>
-                                    <option value="Qualified">30</option>
-                                    <option value="Proposal">50</option>
-                                    <option value="Negotiation">80</option>
-                                    <option value="Closed">100</option>
+                                <select name="probability" id="stage" className='option-box' onChange={handleChange}>
+                                    <option></option>
+                                    <option>0</option>
+                                    <option>30</option>
+                                    <option>50</option>
+                                    <option>80</option>
+                                    <option>100</option>
                                 </select>
                                 <h3 className="data-title">Projected Value:<span className='required'> *</span></h3>
-                                <input type="text" className='new-data-value' placeholder='500' onChange={handleChange}/>
+                                <input type="text" className='new-data-value' placeholder='500' name='projected_value' onChange={handleChange}/>
                                 <h3 className="data-title">Interested Services:</h3>
                                 <div className="check-boxes-container">
                                     <p className='check-box-title'>Check all that apply:</p>
@@ -156,12 +182,17 @@ export default function NewProspect() {
                                     </div>
                                 </div>
                                 <h3 className="data-title">Next Follow-Up</h3>
-                                <input type="date" className='new-data-value' onChange={handleChange}/>
+                                <input type="date" className='new-data-value' name='next_follow_up' onChange={handleChange}/>
                                 <h3 className="data-title">Notes:</h3>
-                                <textarea name="" id="" cols="30" rows="10" className='notes-field' onChange={handleChange}></textarea>
+                                <textarea id="" cols="30" rows="10" name='notes' className='notes-field' onChange={handleChange}></textarea>
                             </div>
-                            {errorMessage && <p className='error-message'>{errorMessage}</p>}
-                            <button className="create-prospect prospect-form" type='submit'>Create New Prospect</button>
+                            {errorMessage && <p className='error-message2'>{errorMessage}</p>}
+                            {success && <p className='success-message'>{successMessage}</p>}
+                            {success ? (
+                                <ReactLoading type="bars" color="#0400D9" height={50} width={50} />
+                            ) : (
+                                <button className="create-prospect prospect-form" type='submit'>Create New Prospect</button>
+                            )}
                         </form>
                     </div>
                 </div>
