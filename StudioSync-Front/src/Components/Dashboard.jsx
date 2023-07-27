@@ -41,7 +41,7 @@ export default function Dashboard() {
         }
     
         fetchProspectDetails()
-      }, [userProspects])
+      }, [userProspects, currentUser])
 
     const handleSort = (newSortType) => {
         if (newSortType === sortType) {

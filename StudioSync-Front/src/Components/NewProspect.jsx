@@ -64,7 +64,6 @@ export default function NewProspect() {
             const addProspect = async() => {
                 try {
                     let prospect = await axios.post(`${BASE_URL}/prospects/create`, formData)
-                    console.log(prospect)
                 } catch (error) {
                     console.error('Error creating prospect:', error)
                 }

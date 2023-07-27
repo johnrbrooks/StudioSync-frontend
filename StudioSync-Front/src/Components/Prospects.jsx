@@ -16,20 +16,12 @@ export default function Prospects() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        const filteredResults = allProspects.filter(
-            result => 
-                result.contact_name.toLowerCase().includes(searchQuery.toLowerCase())
-        )
-        setSearchResults(filteredResults)
-    }, [searchQuery])
-
-    useEffect(() => {
         const getProspects = async() => {
             const response = await axios.get(`${BASE_URL}/prospects/get/userprospects/${currentUser._id}`)
             setUserProspects(response.data)
         }
         getProspects()
-    }, [currentUser])
+    }, [currentUser, userProspects])
 
     useEffect(() => {
         const fetchProspectDetails = async () => {
@@ -46,6 +38,15 @@ export default function Prospects() {
     
         fetchProspectDetails()
       }, [userProspects, currentUser])
+
+    useEffect(() => {
+        const filteredResults = allProspects.filter(
+            result => 
+                result.contact_name.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+        setSearchResults(filteredResults)
+    }, [searchQuery])
+
 
     const handleSort = (newSortType) => {
         if (newSortType === sortType) {
