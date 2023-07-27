@@ -610,4 +610,9 @@ body {
     margin-bottom: 2rem;
 }
 
+.required {
+    font-size: 1rem;
+    color: red;
+}
+
 /* SETTINGS PAGE */
