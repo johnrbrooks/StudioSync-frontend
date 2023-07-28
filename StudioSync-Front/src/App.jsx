@@ -46,7 +46,7 @@ function App() {
     }
     setCurrentUserFromStorage()
     getAllUsers()
-  }, [])
+  }, [currentUser])
 
   const getUser = async () => {
     try {

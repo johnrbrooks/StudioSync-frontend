@@ -1,5 +1,5 @@
 import Nav from './Nav'
-import DeleteModal from './DeleteModal'
+import DeleteUserModal from './DeleteUserModal'
 import { useState, useEffect, useContext, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { BASE_URL, UserContext } from '../App'
@@ -14,33 +14,34 @@ export default function Settings() {
     const [success, setSuccess] = useState(false)
     const [successMessage, setSuccessMessage] = useState('')
     const [errorMessage, setErrorMessage] = useState('')
-    const [formData, setFormData] = useState({
-        name: currentUser.name,
-        username: currentUser.username,
-        password: currentUser.password,
-        mode: currentUser.mode,
-    })
+    const [formData, setFormData] = useState({})
     const [isEditMode, setIsEditMode] = useState(false)
+    const [passwordEdit, setPasswordEdit] = useState(false)
     const [showDeleteModal, setShowDeleteModal] = useState(false)
 
     const formRef = useRef(null)
     const navigate = useNavigate()
 
+    useEffect(() => {
+        const getUser = async() => {
+            const response = await axios.get(`${BASE_URL}users/get/id/${currentUser._id}`)
+            setFormData({
+                name: response.data.name,
+                username: response.data.username,
+                password: response.data.password,
+                confirmPassword: response.data.password,
+                mode: response.data.mode,
+            })
+        }
+        getUser()
+    }, [])
+
+
     const handleChange = (e) => {
         setErrorMessage('')
-        const { name, value, type, checked } = e.target
-        if(type === 'checkbox') {
-            if(checked) {
-                setFormData((prevFormData) => ({
-                    ...prevFormData,
-                    interested_services: [...prevFormData.interested_services, value]
-                }))
-            } else {
-                setFormData((prevFormData) => ({
-                    ...prevFormData,
-                    interested_services: prevFormData.interested_services.filter((service) => service !== value),
-                }))
-            }
+        const { name, value } = e.target
+        if(name === 'password' && value !== currentUser.password) {
+            setPasswordEdit(true)
         } else {
             setFormData((prevFormData) => ({
                 ...prevFormData,
@@ -50,44 +51,54 @@ export default function Settings() {
     }
 
     const handleEditClick = () => {
-        if(isEditMode){
-            setIsEditMode(false)
-        } else {
-            setIsEditMode(true)
+        setIsEditMode((prevIsEditMode) => !prevIsEditMode);
+        // Reset the confirmPassword field if the user is not in edit mode
+        if (!isEditMode) {
+          setFormData((prevFormData) => ({
+            ...prevFormData,
+            confirmPassword: prevFormData.password,
+          }));
         }
-    }
+      };
     
-    const updateProspect = async(e) => {
+    const updateUser = async(e) => {
         e.preventDefault()
-        try {
-            const updateProspect = await axios.put(`${BASE_URL}/prospects/update/${key.id}`, formData)
-            if(updateProspect){
-                setSuccess(true)
-                setSuccessMessage('Updating prospect...')
-                setIsEditMode(false)
-                setTimeout(() => {
-                    setSuccess(false)
-                    setSuccessMessage('')
-                }, 1500)
+        if(formData.password === formData.confirmPassword) {
+            //const formattedData = { ...formData, mode: JSON.parse(formData.mode.toLowerCase()) }
+            try {
+                const updateUser = await axios.put(`${BASE_URL}users/update/${currentUser._id}`, formData)
+                console.log(updateUser)
+                if(updateUser){
+                    setPasswordEdit(false)
+                    setSuccess(true)
+                    setSuccessMessage('Updating User...')
+                    setIsEditMode(false)
+                    setTimeout(() => {
+                        setSuccess(false)
+                        setSuccessMessage('')
+                    }, 1500)
+                }
+            } catch (error) {
+                setErrorMessage('Error updating user')
+                console.error('Error updating user:', error)
             }
-        } catch (error) {
-            setErrorMessage('Error updating prospect')
-            console.error('Error updating prospect:', error)
+        } else {
+            setErrorMessage(`Passwords must match.`)
         }
     }
 
     const handleDelete = async() => {
         try {
-            const updateCurrentUser = await axios.put(`${BASE_URL}/users/${currentUser._id}/removeProspect/${key.id}`)
-            const deleteProspect = await axios.delete(`${BASE_URL}/prospects/delete/${key.id}`)
-            if(deleteProspect && updateCurrentUser){
-                navigate('/prospects')
+            const deleteUser = await axios.delete(`${BASE_URL}users/delete/${currentUser._id}`)
+            if(deleteUser){
+                navigate('/login')
             }
         } catch (error) {
-            setErrorMessage('Error deleting prospect')
-            console.error('Error updating prospect:', error)
+            setErrorMessage('Error deleting user')
+            console.error('Error updating user:', error)
         }
     }
+
 
     return (
         <div>
@@ -103,7 +114,7 @@ export default function Settings() {
                         <div className="prospect-buttons">
                             <button className="create-prospect prospect-form" onClick={handleEditClick}>Edit</button>
                             <button className="delete-prospect prospect-form" onClick={() => setShowDeleteModal(true)}>Delete</button>
-                            <DeleteModal
+                            <DeleteUserModal
                                 show={showDeleteModal}
                                 onCancel={() => setShowDeleteModal(false)}
                                 onConfirm={() => {
@@ -112,14 +123,19 @@ export default function Settings() {
                                 }}
                             />
                         </div>
-                        <form action="" ref={formRef} onSubmit={updateProspect} className="information-form">
+                        <form action="" ref={formRef} onSubmit={updateUser} className="information-form">
                             <div className="new-data-grid">
                                 <h3 className="data-title">Name:<span className='required'> *</span></h3>
-                                <input type="text" className='new-data-value' placeholder='John Doe' name='name' disabled={!isEditMode} value={formData.name} onChange={handleChange}/>
+                                <input type="text" className='new-data-value' name='name' disabled={!isEditMode} value={formData.name} onChange={handleChange}/>
                                 <h3 className="data-title">Username:<span className='required'> *</span></h3>
-                                <input type="text" className='new-data-value' placeholder='John@johndoe.com' name='username' disabled={!isEditMode} value={formData.username} onChange={handleChange}/>
+                                <input type="text" className='new-data-value' name='username' disabled={!isEditMode} value={formData.username} onChange={handleChange}/>
                                 <h3 className="data-title">Password:<span className='required'> *</span></h3>
-                                <input type="password" className='new-data-value' placeholder='111-111-1111' name='password' disabled={!isEditMode} value={formData.password} onChange={handleChange}/>
+                                <input type="password" className='new-data-value' name='password' disabled={!isEditMode} value={formData.password} onChange={handleChange}/>
+                                {passwordEdit && (
+                                    <>
+                                        <h3 className="data-title">Confirm Password:<span className='required'> *</span></h3>
+                                        <input type="password" className='new-data-value' placeholder='Confirm Password' name='passwordConfirm' value={formData.confirmPassword} disabled={!isEditMode} onChange={handleChange}/>
+                                    </>)}
                                 <h3 className="data-title">Mode:<span className='required'> *</span></h3>
                                 <select name="mode" className='option-box' disabled={!isEditMode} value={formData.mode} onChange={handleChange}>
                                     <option>True</option>
