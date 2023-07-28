@@ -60,7 +60,7 @@ export default function Calendar() {
                                 </div>
                                 {filterProspectsByDate(date).map((prospect) => (
                                     <div className="day-items">
-                                        <div key={prospect.id} onClick={() => handleSelection(prospect)}>
+                                        <div key={prospect.id} onClick={() => handleSelection(prospect)} className='day-content'>
                                             <p>{prospect.contact_name}</p>
                                         </div>
                                     </div>

@@ -22,7 +22,7 @@ export default function Prospects() {
             setUserProspects(response.data)
         }
         getProspects()
-    }, [])
+    }, [currentUser])
 
 
     //Axios token lines taken from chatGPT to solve error issue

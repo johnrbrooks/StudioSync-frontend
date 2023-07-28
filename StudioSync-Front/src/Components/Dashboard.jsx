@@ -21,7 +21,7 @@ export default function Dashboard() {
             setUserProspects(response.data)
         }
         getProspects()
-    }, [])
+    }, [currentUser])
 
     useEffect(() => {
         const fetchProspectDetails = async () => {

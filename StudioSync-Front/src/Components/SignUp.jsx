@@ -41,6 +41,8 @@ export default function SignUp() {
                 setSuccess(true)
                 setIsLoggedIn(true)
                 setCurrentUser(newUser)
+                sessionStorage.setItem("currentUser", JSON.stringify(newUser))
+                sessionStorage.setItem("isLoggedIn", "true")
                 setTimeout(() => {
                     navigate('/dashboard')
                 }, 2000)

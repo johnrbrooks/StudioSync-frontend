@@ -443,8 +443,8 @@ body {
 }
 
 .today {
-    background-color:var(--secondary-color);
     border-radius: 5px;
+    box-shadow:0 8px 20px rgba(0, 0, 0, 0.6);
 }
 
 .day-title {
@@ -456,6 +456,7 @@ body {
     border-radius: 5px;
     padding: 0.5rem 0;
     width: 100%;
+    background-color: white;
 }
 
 hr {
@@ -471,14 +472,22 @@ hr {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 0.5rem 0;
+}
+
+.day-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     border: solid black 1px;
     border-radius: 5px;
     padding: 0.5rem 0;
-    margin: 0.5rem 0;
-    width: 100%;
+    width: 90%;
+    background-color: var(--secondary-color);
 }
 
-.day-items:hover {
+.day-content:hover {
     cursor: pointer;
     background-color: var(--primary-color);
     color: white;
