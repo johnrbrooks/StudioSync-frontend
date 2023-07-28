@@ -149,7 +149,10 @@ export default function Prospects() {
                                     <h3>{prospect.contact_name}</h3>
                                 </div>
                                 <div className='prospect-quick-details'>
-                                    <p className='quick-email'>{prospect.email}</p>
+                                    <p className='quick-email'>
+                                        {prospect?.email.slice(0, 15)}
+                                        {prospect?.email.length > 15 && '...'}
+                                    </p>
                                     <p className={`quick-stage ${prospect.stage === 'Unqualified' ? 'unqualified' : prospect.stage === 'Qualified' ? 'qualified' : prospect.stage === 'Proposal' ? 'proposal' : prospect.stage === 'Negotiation' ? 'negotiation' : prospect.stage === 'Closed' ? 'won' : ''}`}>
                                         {prospect.stage}</p>
                                     <p className={`quick-probability ${prospect.probability === 0 ? 'prospect' : prospect.probability === 30 ? 'unlikely' : prospect.probability === 50 ? 'possible' : prospect.probability === 90 ? 'likely' : prospect.probability === 100 ? 'won' : ''}`}>{prospect.probability}%</p>

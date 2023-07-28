@@ -57,15 +57,17 @@ export default function Dashboard() {
         }
         switch (sortType) {
             case 'ABC':
-                return sortDirection === 'ascending' ? a.contact_name.localeCompare(b.contact_name) : b.contact_name.localeCompare(a.contact_name);
+                return sortDirection === 'ascending' ? a.contact_name.localeCompare(b.contact_name) : b.contact_name.localeCompare(a.contact_name)
             case 'Stage':
-                return sortDirection === 'ascending' ? a.stage.localeCompare(b.stage) : b.stage.localeCompare(a.stage);
+                return sortDirection === 'ascending' ? a.stage.localeCompare(b.stage) : b.stage.localeCompare(a.stage)
             case 'Probability':
-                return sortDirection === 'ascending' ? a.probability - b.probability : b.probability - a.probability;
+                return sortDirection === 'ascending' ? a.probability - b.probability : b.probability - a.probability
             case 'Value':
-                return sortDirection === 'ascending' ? a.projected_value - b.projected_value : b.projected_value - a.projected_value;
-            case 'Created':
-                return sortDirection === 'ascending' ? a.createdAt.localeCompare(b.createdAt) : b.createdAt.localeCompare(a.createdAt);
+                return sortDirection === 'ascending' ? a.projected_value - b.projected_value : b.projected_value - a.projected_value
+            case 'FollowUp':
+                const dateA = new Date(a.next_follow_up)
+                const dateB = new Date(b.next_follow_up)
+                return sortDirection === 'ascending' ? dateA - dateB : dateB - dateA
             default:
                 return 0;
         }
@@ -77,11 +79,13 @@ export default function Dashboard() {
         }
         switch (sortType) {
             case 'ABC':
-                return sortDirection === 'ascending' ? a.contact_name.localeCompare(b.contact_name) : b.contact_name.localeCompare(a.contact_name);
+                return sortDirection === 'ascending' ? a.contact_name.localeCompare(b.contact_name) : b.contact_name.localeCompare(a.contact_name)
             case 'Value':
-                return sortDirection === 'ascending' ? a.projected_value - b.projected_value : b.projected_value - a.projected_value;
-            case 'Created':
-                return sortDirection === 'ascending' ? a.createdAt.localeCompare(b.createdAt) : b.createdAt.localeCompare(a.createdAt);
+                return sortDirection === 'ascending' ? a.projected_value - b.projected_value : b.projected_value - a.projected_value
+            case 'FollowUp':
+                const dateA = new Date(a.next_follow_up)
+                const dateB = new Date(b.next_follow_up)
+                return sortDirection === 'ascending' ? dateA - dateB : dateB - dateA            
             default:
                 return 0;
         }
@@ -102,7 +106,7 @@ export default function Dashboard() {
                     <p className='sort-button' onClick={() => handleSort('Stage')}>Stage</p>
                     <p className='sort-button' onClick={() => handleSort('Probability')}>Probability</p>
                     <p className='sort-button' onClick={() => handleSort('Value')}>Value</p>
-                    <p className='sort-button' onClick={() => handleSort('Created')}>Created</p>
+                    <p className='sort-button' onClick={() => handleSort('FollowUp')}>Follow-Up</p>
                 </div>
                 <div className="prospect-headers">
                     <div className="prospect-name">
@@ -113,7 +117,7 @@ export default function Dashboard() {
                         <p className='quick-stage-header'>Stage</p>
                         <p className='quick-probability-header'>Probability</p>
                         <p className='quick-value-header'>Est. Value</p>
-                        <p className='quick-created-header'>Created</p>
+                        <p className='quick-created-header'>Follow-Up</p>
                     </div>
                 </div>
                 {sortedProspects === undefined ? (
@@ -129,12 +133,22 @@ export default function Dashboard() {
                                 <h3>{prospect.contact_name}</h3>
                             </div>
                             <div className='prospect-quick-details'>
-                                <p className='quick-email'>{prospect.email}</p>
+                                <p className='quick-email'>
+                                    {prospect?.email.slice(0, 15)}
+                                    {prospect?.email.length > 15 && '...'}
+                                </p>
                                 <p className={`quick-stage ${prospect.stage === 'Unqualified' ? 'unqualified' : prospect.stage === 'Qualified' ? 'qualified' : prospect.stage === 'Proposal' ? 'proposal' : prospect.stage === 'Negotiation' ? 'negotiation' : prospect.stage === 'Closed' ? 'won' : ''}`}>
                                     {prospect.stage}</p>
                                 <p className={`quick-probability ${prospect.probability === 0 ? 'prospect' : prospect.probability === 30 ? 'unlikely' : prospect.probability === 50 ? 'possible' : prospect.probability === 90 ? 'likely' : prospect.probability === 100 ? 'won' : ''}`}>{prospect.probability}%</p>
                                 <p className='quick-value'>${prospect.projected_value}</p>
-                                <p className='quick-created'>{moment(prospect.createdAt).fromNow()}</p>
+                                <p className='quick-created'>{moment(prospect.next_follow_up, 'YYYY-MM-DD').set({ hour: 0, minute: 0, second: 0, millisecond: 0 }).calendar(null, {
+                                    sameDay: '[Today]',
+                                    nextDay: '[Tomorrow]',
+                                    nextWeek: 'dddd',
+                                    lastDay: '[Yesterday]',
+                                    lastWeek: '[Last] dddd',
+                                    sameElse: 'MM/DD/YYYY',
+                                })}</p>
                             </div>
                         </div>)
                         )
@@ -151,7 +165,7 @@ export default function Dashboard() {
                     <h4 className='sort-label'>Sort By:</h4>
                     <p className='sort-button' onClick={() => handleSort('ABC')}>ABC</p>
                     <p className='sort-button' onClick={() => handleSort('Value')}>Value</p>
-                    <p className='sort-button' onClick={() => handleSort('Created')}>Created</p>
+                    <p className='sort-button' onClick={() => handleSort('FollowUp')}>Follow-Up</p>
                 </div>
                 <div className="prospect-headers">
                     <div className="prospect-name">
@@ -162,7 +176,7 @@ export default function Dashboard() {
                         <p className='quick-stage-header'>Stage</p>
                         <p className='quick-probability-header'>Probability</p>
                         <p className='quick-value-header'>Est. Value</p>
-                        <p className='quick-created-header'>Created</p>
+                        <p className='quick-created-header'>Follow-Up</p>
                     </div>
                 </div>
                 {sortedClosedProspects === undefined ? (
@@ -178,12 +192,22 @@ export default function Dashboard() {
                                 <h3>{prospect.contact_name}</h3>
                             </div>
                             <div className='prospect-quick-details'>
-                                <p className='quick-email'>{prospect.email}</p>
+                                <p className='quick-email'>
+                                    {prospect?.email.slice(0, 15)}
+                                    {prospect?.email.length > 15 && '...'}
+                                </p>
                                 <p className={`quick-stage ${prospect.stage === 'Unqualified' ? 'unqualified' : prospect.stage === 'Qualified' ? 'qualified' : prospect.stage === 'Proposal' ? 'proposal' : prospect.stage === 'Negotiation' ? 'negotiation' : prospect.stage === 'Closed' ? 'won' : ''}`}>
                                     {prospect.stage}</p>
                                 <p className={`quick-probability ${prospect.probability === 0 ? 'prospect' : prospect.probability === 30 ? 'unlikely' : prospect.probability === 50 ? 'possible' : prospect.probability === 90 ? 'likely' : prospect.probability === 100 ? 'won' : ''}`}>{prospect.probability}%</p>
                                 <p className='quick-value'>${prospect.projected_value}</p>
-                                <p className='quick-created'>{moment(prospect.createdAt).fromNow()}</p>
+                                <p className='quick-created'>{moment(prospect.next_follow_up, 'YYYY-MM-DD').set({ hour: 0, minute: 0, second: 0, millisecond: 0 }).calendar(null, {
+                                    sameDay: '[Today]',
+                                    nextDay: '[Tomorrow]',
+                                    nextWeek: 'dddd',
+                                    lastDay: '[Yesterday]',
+                                    lastWeek: '[Last] dddd',
+                                    sameElse: 'MM/DD/YYYY',
+                                })}</p>
                             </div>
                         </div>)
                         )

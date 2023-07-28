@@ -26,14 +26,52 @@ function App() {
   useEffect(() => {
     const getAllUsers = async () => {
       try {
-        let response = await axios.get(`${BASE_URL}/users/get/all`);
-        setUsers(response.data);
+        let response = await axios.get(`${BASE_URL}/users/get/all`)
+        setUsers(response.data)
       } catch (error) {
-        console.log(error);
+        console.log(error)
       }
     }
+    checkAuthentication()
     getAllUsers()
   }, [])
+
+  const checkAuthentication = () => {
+    const isLoggedIn = sessionStorage.getItem("isLoggedIn") === "true";
+    setIsLoggedIn(isLoggedIn);
+
+    if (isLoggedIn) {
+      // Fetch the currentUser from sessionStorage and set it in the state
+      const storedUser = sessionStorage.getItem("currentUser");
+      if (storedUser) {
+        setCurrentUser(JSON.parse(storedUser));
+      } else {
+        navigate("/login");
+      }
+    } else {
+      navigate("/login");
+    }
+  };
+
+  // Clear session storage and reset states
+  const handleClearSessionStorage = () => {
+    sessionStorage.clear()
+    setIsLoggedIn(false)
+    setCurrentUser(null)
+    checkAuthentication()
+  }
+
+  // Fetch the current user from the server based on the stored email
+  const getUser = async () => {
+    try {
+      let username = sessionStorage.getItem("currentUser")
+      const response = await axios.get(`${BASE_URL}users/get/username/${username}`)
+      return response.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
 
   return (
     <UserContext.Provider

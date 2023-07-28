@@ -415,7 +415,78 @@ body {
 
 /* CALENDAR PAGE */
 
+.page-header {
+    margin: 2rem 0;
+}
 
+.current-date {
+    margin-bottom: 2rem;
+}
+
+.calendar-days-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    grid-gap: 0.5rem;
+}
+
+.day {
+    min-height: 60vh;
+}
+
+.today {
+    background-color:var(--secondary-color);
+    border-radius: 5px;
+}
+
+.day-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid black 1px;
+    border-radius: 5px;
+    padding: 0.5rem 0;
+    width: 100%;
+}
+
+hr {
+    width: 80%;
+    height: 2px;
+    margin: 0.5rem 0;
+    background-color: black;
+    border: none;
+}
+
+.day-items {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid black 1px;
+    border-radius: 5px;
+    padding: 0.5rem 0;
+    margin: 0.5rem 0;
+    width: 100%;
+}
+
+.day-items:hover {
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.follow-up-title {
+    margin-bottom: 1rem;
+}
 
 /* PROSPECTS PAGE */
 

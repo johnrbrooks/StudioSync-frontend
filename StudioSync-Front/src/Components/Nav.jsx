@@ -22,6 +22,8 @@ export default function Nav() {
         setCurrentUser(null)
         setUserProspects([])
         setAllProspects([])
+        sessionStorage.removeItem("currentUser");
+        sessionStorage.setItem("isLoggedIn", "false");
         setTimeout(() => {
             navigate('/login')
         }, 2000)

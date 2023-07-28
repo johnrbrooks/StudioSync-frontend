@@ -35,11 +35,13 @@ export default function Login() {
             setSuccess(true)
             setIsLoggedIn(true)
             setCurrentUser(foundUser)
+            sessionStorage.setItem("currentUser", JSON.stringify(foundUser));
+            sessionStorage.setItem("isLoggedIn", "true");
             setTimeout(() => {
                 navigate('/dashboard')
             }, 2000)
         } else {
-            setMessage('Incorrect username or password')
+            setMessage('Incorrect username or password.')
         }
     }
 
