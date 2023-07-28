@@ -102,7 +102,7 @@ export default function ProspectItem() {
             const updateCurrentUser = await axios.put(`${BASE_URL}/users/${currentUser._id}/removeProspect/${key.id}`)
             const deleteProspect = await axios.delete(`${BASE_URL}/prospects/delete/${key.id}`)
             if(deleteProspect && updateCurrentUser){
-                navigate('/dashboard')
+                navigate('/prospects')
             }
         } catch (error) {
             setErrorMessage('Error deleting prospect')

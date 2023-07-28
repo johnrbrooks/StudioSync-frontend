@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { UserContext, BASE_URL } from '../App'
 import axios from 'axios'
 import ReactLoading from 'react-loading'
@@ -28,6 +28,10 @@ export default function SignUp() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        if (formState.name === '' || formState.username === '' || formState.password === '' || formState.confirmpassword === '') {
+            setMessage('All fields are required.')
+            return;
+        }
         if(users.filter((user) => user.username === formState.username.toLowerCase()).length > 0) {
             setMessage('Account with that username already exists!')
         } else if (formState.password === formState.confirmpassword) {
@@ -76,7 +80,10 @@ export default function SignUp() {
                     <input type="password" placeholder='Password' className='password-input' id='password' onChange={handleChange} value={formState.password}/>
                     <input type="password" placeholder='Confirm Password' className='password-input2' id='confirmpassword' onChange={handleChange} value={formState.confirmpassword}/>
                     <p className="error-message">{message}</p>
-                    <button className="login-button" type='submit'>Create Account</button>
+                    <div className='sign-up-buttons-container'>
+                        <button className="login-button" type='submit'>Create Account</button>
+                        <Link to="/login" className='back-button'>Back to login</Link>
+                    </div>
                 </form>
             </div>
         </div>

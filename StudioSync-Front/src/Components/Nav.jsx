@@ -4,7 +4,7 @@ import { UserContext } from '../App'
 import ReactLoading from 'react-loading'
 
 export default function Nav() {
-    const { users, setUsers, isLoggedIn, setIsLoggedIn, setCurrentUser } = useContext(UserContext)
+    const { users, setUsers, isLoggedIn, setIsLoggedIn, setCurrentUser, setUserProspects, setAllProspects } = useContext(UserContext)
 
     const [isActive, setIsActive] = useState('Dashboard')
     const [isLoggingOut, setIsLoggingOut] = useState(false)
@@ -20,6 +20,8 @@ export default function Nav() {
         setIsLoggingOut(true)
         setIsLoggedIn(false)
         setCurrentUser(null)
+        setUserProspects([])
+        setAllProspects([])
         setTimeout(() => {
             navigate('/login')
         }, 2000)

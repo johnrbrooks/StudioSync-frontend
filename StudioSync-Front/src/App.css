@@ -182,7 +182,22 @@ body {
 
 /* SIGNUP PAGE */
 
+.sign-up-buttons-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
+.back-button {
+    text-decoration: none;
+    margin-top: 1.5rem;
+    color: var(--primary-color)
+}
+
+.back-button:hover {
+    color: var(--unlikely-color)
+}
 
 
 /* DASHBOARD PAGE */

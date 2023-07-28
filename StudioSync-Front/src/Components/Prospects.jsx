@@ -12,6 +12,7 @@ export default function Prospects() {
     const [searchResults, setSearchResults] = useState([])
     const [sortType, setSortType] = useState('ABC')
     const [sortDirection, setSortDirection] = useState('ascending')
+    const [allProspectsUpdated, setAllProspectsUpdated] = useState(false)
 
     const navigate = useNavigate()
 
@@ -21,32 +22,56 @@ export default function Prospects() {
             setUserProspects(response.data)
         }
         getProspects()
-    }, [currentUser, userProspects])
+    }, [])
 
+
+    //Axios token lines taken from chatGPT to solve error issue
     useEffect(() => {
+        let source = axios.CancelToken.source(); // Create a cancel token source
+      
         const fetchProspectDetails = async () => {
-          if (userProspects.length === 0) return
-    
-          try {
-            const prospectDetails = await Promise.all(userProspects.map((prospectId) => axios.get(`${BASE_URL}/prospects/get/${prospectId}`)))
-            const prospectData = prospectDetails.map((response) => response.data)
-            setAllProspects(prospectData)
-          } catch (error) {
-            console.error('Error fetching prospect details:', error)
+          if (userProspects.length === 0) {
+            setAllProspects([])
+            setAllProspectsUpdated(true)
+            return
           }
+          try {
+            const prospectDetails = await Promise.all(
+              userProspects.map((prospectId) =>
+                axios.get(`${BASE_URL}/prospects/get/${prospectId}`, {
+                  cancelToken: source.token, // Pass the cancel token to the request
+                })
+              )
+            );
+            const prospectData = prospectDetails.map((response) => response.data);
+            setAllProspects(prospectData);
+            setAllProspectsUpdated(true);
+          } catch (error) {
+            if (!axios.isCancel(error)) {
+              // Check if the error is due to a canceled request or other error
+              console.error('Error fetching prospect details:', error);
+            }
+          }
+        };
+        fetchProspectDetails();
+        return () => {
+          // Cancel the request if the component unmounts or if there is a new request
+          source.cancel('Request canceled by cleanup');
+        };
+      }, [userProspects, currentUser]);
+
+
+      useEffect(() => {
+        if (allProspectsUpdated) {
+            const updateSearchResults = async () => {
+                const filteredResults = allProspects.filter(
+                    (result) => result.contact_name.toLowerCase().includes(searchQuery.toLowerCase())
+                );
+                setSearchResults(filteredResults);
+            };
+            updateSearchResults();
         }
-    
-        fetchProspectDetails()
-      }, [userProspects, currentUser])
-
-    useEffect(() => {
-        const filteredResults = allProspects.filter(
-            result => 
-                result.contact_name.toLowerCase().includes(searchQuery.toLowerCase())
-        )
-        setSearchResults(filteredResults)
-    }, [searchQuery])
-
+    }, [searchQuery, allProspects, allProspectsUpdated])
 
     const handleSort = (newSortType) => {
         if (newSortType === sortType) {

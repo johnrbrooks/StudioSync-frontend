@@ -25,21 +25,20 @@ export default function Dashboard() {
 
     useEffect(() => {
         const fetchProspectDetails = async () => {
-          if (userProspects.length === 0) return
-    
-          try {
-            const prospectDetails = await Promise.all(userProspects.map((prospectId) => axios.get(`${BASE_URL}/prospects/get/${prospectId}`)))
-            const prospectData = prospectDetails.map((response) => response.data)
-            setAllProspects(prospectData)
-            const openProspects = prospectData.filter((prospect) => prospect.stage !== 'Closed')
-            const closedProspects = prospectData.filter((prospect) => prospect.stage === 'Closed')
-            setOpenProspects(openProspects)
-            setClosedProspects(closedProspects)
-          } catch (error) {
-            console.error('Error fetching prospect details:', error)
-          }
+            if (userProspects.length === 0) return
+
+            try {
+                const prospectDetails = await Promise.all(userProspects.map((prospectId) => axios.get(`${BASE_URL}/prospects/get/${prospectId}`)))
+                const prospectData = prospectDetails.map((response) => response.data)
+                setAllProspects(prospectData)
+                const openProspects = prospectData.filter((prospect) => prospect.stage !== 'Closed')
+                const closedProspects = prospectData.filter((prospect) => prospect.stage === 'Closed')
+                setOpenProspects(openProspects)
+                setClosedProspects(closedProspects)
+            } catch (error) {
+                console.error('Error fetching prospect details:', error)
+            }
         }
-    
         fetchProspectDetails()
       }, [userProspects, currentUser])
 
