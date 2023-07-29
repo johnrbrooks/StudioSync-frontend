@@ -129,12 +129,16 @@ export default function Prospects() {
                     <button className="create-prospect" onClick={() => {handleClick()}}>New</button>
                 </div>
                 <div className="utilities-bar">
-                    <h4 className='sort-label'>Sort By:</h4>
-                    <p className='sort-button' onClick={() => handleSort('ABC')}>ABC</p>
-                    <p className='sort-button' onClick={() => handleSort('Stage')}>Stage</p>
-                    <p className='sort-button' onClick={() => handleSort('Probability')}>Probability</p>
-                    <p className='sort-button' onClick={() => handleSort('Value')}>Value</p>
-                    <p className='sort-button' onClick={() => handleSort('Created')}>Created</p>
+                    <div className="sort-by">
+                        <h4 className='sort-label'>Sort By:</h4>
+                    </div>
+                    <div className="sort-buttons">
+                        <p className='sort-button' onClick={() => handleSort('ABC')}>ABC</p>
+                        <p className='sort-button' onClick={() => handleSort('Stage')}>Stage</p>
+                        <p className='sort-button' onClick={() => handleSort('Probability')}>Probability</p>
+                        <p className='sort-button' onClick={() => handleSort('Value')}>Value</p>
+                        <p className='sort-button' onClick={() => handleSort('Created')}>Created</p>
+                    </div>
                 </div>
                 {sortedProspects === undefined ? (
                         <div className="prospect-item">

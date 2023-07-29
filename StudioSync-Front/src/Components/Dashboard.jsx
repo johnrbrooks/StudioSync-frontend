@@ -101,12 +101,16 @@ export default function Dashboard() {
             <Nav />
             <div className="dashboard-page">
                 <div className="utilities-bar">
-                    <h4 className='sort-label'>Sort By:</h4>
-                    <p className='sort-button' onClick={() => handleSort('ABC')}>ABC</p>
-                    <p className='sort-button' onClick={() => handleSort('Stage')}>Stage</p>
-                    <p className='sort-button' onClick={() => handleSort('Probability')}>Probability</p>
-                    <p className='sort-button' onClick={() => handleSort('Value')}>Value</p>
-                    <p className='sort-button' onClick={() => handleSort('FollowUp')}>Follow-Up</p>
+                    <div className="sort-by">
+                        <h4 className='sort-label'>Sort By:</h4>
+                    </div>
+                    <div className="sort-buttons">
+                        <p className='sort-button' onClick={() => handleSort('ABC')}>ABC</p>
+                        <p className='sort-button' onClick={() => handleSort('Stage')}>Stage</p>
+                        <p className='sort-button' onClick={() => handleSort('Probability')}>Probability</p>
+                        <p className='sort-button' onClick={() => handleSort('Value')}>Value</p>
+                        <p className='sort-button' onClick={() => handleSort('FollowUp')}>Follow-Up</p>
+                    </div>
                 </div>
                 <div className="prospect-headers">
                     <div className="prospect-name">
@@ -162,10 +166,14 @@ export default function Dashboard() {
             </div>
             <div className="closed-page">
                 <div className="utilities-bar">
-                    <h4 className='sort-label'>Sort By:</h4>
-                    <p className='sort-button' onClick={() => handleSort('ABC')}>ABC</p>
-                    <p className='sort-button' onClick={() => handleSort('Value')}>Value</p>
-                    <p className='sort-button' onClick={() => handleSort('FollowUp')}>Follow-Up</p>
+                    <div className="sort-by">
+                        <h4 className='sort-label'>Sort By:</h4>
+                    </div>
+                    <div className="sort-buttons">
+                        <p className='sort-button' onClick={() => handleSort('ABC')}>ABC</p>
+                        <p className='sort-button' onClick={() => handleSort('Value')}>Value</p>
+                        <p className='sort-button' onClick={() => handleSort('FollowUp')}>Follow-Up</p>
+                    </div>
                 </div>
                 <div className="prospect-headers">
                     <div className="prospect-name">

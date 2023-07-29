@@ -57,6 +57,10 @@ body {
     align-items: center;
 }
 
+.hamburger {
+    display: none;
+}
+
 .options {
     width: 22%;
     display: flex;
@@ -106,7 +110,6 @@ body {
 
 .login-container {
     text-align: center;
-    width: 20%;
     border-radius: 5px;
     padding: 2.5rem 1.5rem;
     box-shadow:0 8px 20px rgba(0, 0, 0, 0.6);
@@ -178,8 +181,6 @@ body {
     align-items: center;
 }
 
-
-
 /* SIGNUP PAGE */
 
 .sign-up-buttons-container {
@@ -224,6 +225,10 @@ body {
     justify-content: end;
     align-items: center;
     padding: 1rem 0;
+}
+
+.sort-buttons {
+    display: flex;
 }
 
 .sort-label {
@@ -300,6 +305,53 @@ body {
         justify-content: center;
         align-items: center;
     }
+
+    .nav {
+        display: none;
+        justify-content: space-evenly;
+    }
+
+    .page-title {
+        text-align: center;
+        margin: 2rem 0;
+    }
+
+    .dashboard-page,
+    .closed-page {
+        margin: 0;
+    }
+
+    .prospects-page {
+        margin: 2rem 0;
+    }
+    
+    .prospect-settings {
+        background-color: var(--secondary-color);
+        padding: 0.5rem 0;
+        border-radius: 5px;
+    }
+    
+    .prospect-settings-title {
+        background-color: var(--secondary-color);
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+    }
+
+    .search-bar {
+        margin: 1rem 0;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .create-prospect {
+        padding: 0.5rem 3rem;
+        margin-top: 1rem;
+    }
+
+    .prospect-name {
+        margin-left: 0;
+        padding: 0.5rem 0;
+    }
     
     .prospect-quick-details-headers,
     .prospect-quick-details {
@@ -307,16 +359,27 @@ body {
     }
 
     .utilities-bar {
-        display: none;
+        flex-direction: column;
+        justify-content: space-evenly;
+        padding: 0.5rem 0;
     }
 
-    .prospect-name {
-        width: 90vw;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .sort-label {
+        margin-bottom: 1rem;
+        padding: 0;
+    }
+    
+    .sort-button {
+        padding: 0.25rem 0.75rem;
+        margin: 0 0.25rem;
+        background-color: rgb(212, 212, 212);
+        border-radius: 5px;
     }
 }
+
+/* HAMBURGER MENU */
+
+
 
 .prospect-item {
     display: flex;
