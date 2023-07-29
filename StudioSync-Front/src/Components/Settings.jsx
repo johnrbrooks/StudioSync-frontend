@@ -29,19 +29,30 @@ export default function Settings() {
                 name: response.data.name,
                 username: response.data.username,
                 password: response.data.password,
-                confirmPassword: response.data.password,
+                confirmPassword: '',
                 mode: response.data.mode,
             })
         }
         getUser()
-    }, [])
+    }, [currentUser])
 
 
     const handleChange = (e) => {
         setErrorMessage('')
         const { name, value } = e.target
-        if(name === 'password' && value !== currentUser.password) {
-            setPasswordEdit(true)
+        if (name === 'password') {
+            if (passwordEdit) {
+                // Allow editing password field when passwordEdit is true
+                setFormData((prevFormData) => ({
+                    ...prevFormData,
+                    password: value,
+                }));
+            } 
+        } else if (name === 'confirmPassword') {
+            setFormData((prevFormData) => ({
+                ...prevFormData,
+                confirmPassword: value,
+            }))
         } else {
             setFormData((prevFormData) => ({
                 ...prevFormData,
@@ -49,6 +60,10 @@ export default function Settings() {
             }))
         }
     }
+
+    const handlePasswordClick = () => {
+        setPasswordEdit(true);
+    };
 
     const handleEditClick = () => {
         setIsEditMode((prevIsEditMode) => !prevIsEditMode);
@@ -64,9 +79,9 @@ export default function Settings() {
     const updateUser = async(e) => {
         e.preventDefault()
         if(formData.password === formData.confirmPassword) {
-            //const formattedData = { ...formData, mode: JSON.parse(formData.mode.toLowerCase()) }
+            const formattedData = { ...formData, mode: JSON.parse(formData.mode) }
             try {
-                const updateUser = await axios.put(`${BASE_URL}users/update/${currentUser._id}`, formData)
+                const updateUser = await axios.put(`${BASE_URL}users/update/${currentUser._id}`, formattedData)
                 console.log(updateUser)
                 if(updateUser){
                     setPasswordEdit(false)
@@ -99,6 +114,7 @@ export default function Settings() {
         }
     }
 
+    console.log(formData)
 
     return (
         <div>
@@ -130,16 +146,16 @@ export default function Settings() {
                                 <h3 className="data-title">Username:<span className='required'> *</span></h3>
                                 <input type="text" className='new-data-value' name='username' disabled={!isEditMode} value={formData.username} onChange={handleChange}/>
                                 <h3 className="data-title">Password:<span className='required'> *</span></h3>
-                                <input type="password" className='new-data-value' name='password' disabled={!isEditMode} value={formData.password} onChange={handleChange}/>
+                                <input type="password" className='new-data-value' placeholder='New Password' name='password' disabled={!isEditMode} value={formData.password} onClick={handlePasswordClick} onChange={handleChange}/>
                                 {passwordEdit && (
                                     <>
                                         <h3 className="data-title">Confirm Password:<span className='required'> *</span></h3>
-                                        <input type="password" className='new-data-value' placeholder='Confirm Password' name='passwordConfirm' value={formData.confirmPassword} disabled={!isEditMode} onChange={handleChange}/>
+                                        <input type="password" className='new-data-value' placeholder='Confirm Password' name='confirmPassword' disabled={!isEditMode} onChange={handleChange}/>
                                     </>)}
                                 <h3 className="data-title">Mode:<span className='required'> *</span></h3>
                                 <select name="mode" className='option-box' disabled={!isEditMode} value={formData.mode} onChange={handleChange}>
-                                    <option>True</option>
-                                    <option>False</option>
+                                    <option value='true'>True</option>
+                                    <option value='false'>False</option>
                                 </select>
                             </div>
                             {errorMessage && <p className='error-message2'>{errorMessage}</p>}
