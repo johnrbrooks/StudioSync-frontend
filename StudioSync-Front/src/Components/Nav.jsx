@@ -1,7 +1,6 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useState, useEffect, useContext } from 'react'
 import { UserContext } from '../App'
-import HamburgerMenu from './HamburgerMenu'
 import ReactLoading from 'react-loading'
 
 export default function Nav() {
