@@ -52,8 +52,8 @@ export default function Calendar() {
                 <div className="calendar-days-container">
                     <div className="days-grid">
                         {daysOfWeek.map((date, index) => (
-                            <div className={`day ${date === todayFormatted ? 'today' : ''}`} key={index}>
-                                <div className="day-title">
+                            <div className='day' key={index}>
+                                <div className={`day-title ${date === todayFormatted ? 'today' : ''}`}>
                                     <h2 className="date">{date}</h2>
                                     <hr />
                                     <h2>{moment().day(index + 1).format('dddd')}<span className='format-change'>,&nbsp;</span></h2>

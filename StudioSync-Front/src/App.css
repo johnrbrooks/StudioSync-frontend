@@ -483,6 +483,7 @@ body {
 .today {
     border-radius: 5px;
     box-shadow:0 8px 20px rgba(0, 0, 0, 0.6);
+    background-color: white;
 }
 
 .day-title {
@@ -494,7 +495,7 @@ body {
     border-radius: 5px;
     padding: 0.5rem 0;
     width: 100%;
-    background-color: white;
+    background-color: var(--tertiary-color);
 }
 
 hr {
