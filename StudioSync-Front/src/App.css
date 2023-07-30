@@ -480,12 +480,6 @@ body {
     min-height: 60vh;
 }
 
-.today {
-    border-radius: 5px;
-    box-shadow:0 8px 20px rgba(0, 0, 0, 0.6);
-    background-color: white;
-}
-
 .day-title {
     display: flex;
     flex-direction: column;
@@ -496,6 +490,12 @@ body {
     padding: 0.5rem 0;
     width: 100%;
     background-color: var(--tertiary-color);
+}
+
+.today {
+    border-radius: 5px;
+    box-shadow:0 8px 20px rgba(0, 0, 0, 0.6);
+    background-color: white;
 }
 
 hr {
