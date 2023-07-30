@@ -48,6 +48,91 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+}
+
+.hamburger-nav {
+    display: none;
+}
+
+.hamburger {
+    display: block;
+    width: 35px;
+    cursor: pointer;
+    appearance: none;
+    background: none;
+    outline: none;
+    border: none;
+    z-index: 99;
+}
+
+.hamburger .bar, .hamburger:after, .hamburger:before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 5px;
+    background-color: var(--primary-color);
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+.hamburger.is-active::before {
+    transform: rotate(-45deg) translate(-8px, 6px);
+}
+
+.hamburger.is-active::after {
+    transform: rotate(45deg) translate(-9px, -8px);
+}
+
+.hamburger.is-active .bar {
+    opacity: 0;
+}
+
+.menu-container {
+    position: fixed;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 98;
+    background-color: var(--secondary-color);
+    transition: 0.4s;
+    overflow: hidden;
+}
+
+.menu-container.is-active {
+    left: 0;
+}
+
+.menu-active {
+    border: white solid 2px;
+}
+
+.nav-menu-item {
+    text-decoration: none;
+    color: white;
+    margin: 1rem 0;
+    font-size: 1.5rem;
+    background-color: var(--primary-color);
+    padding: 0.5rem 2rem;
+    border-radius: 5px;
+    width: 15rem;
+    text-align: center;
+    box-shadow:0 8px 20px rgba(0, 0, 0, 0.6);
+}
+
+.nav-menu-item:hover {
+    cursor: pointer;
+    background-color: var(--possible-color);
+}
+
+.log-out-menu {
+    border: none;
+    font-family: 'Fira Sans', sans-serif;
 }
 
 .pages {
@@ -55,10 +140,6 @@ body {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-}
-
-.hamburger {
-    display: none;
 }
 
 .options {
@@ -120,12 +201,21 @@ body {
     margin: 1.5rem 0;
 }
 
+.login-form,
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 2rem 1rem 2rem;
+}
+
 .username-input,
 .password-input,
 .name-input,
 .password-input2 {
     padding: 0.75rem 0.75rem;
-    width: 65%;
+    width: 17rem;
     border-radius: 5px;
     border: 1px gray solid;
 }
@@ -153,7 +243,7 @@ body {
 }
 
 .inquiry-note {
-    margin: 1rem 0;
+    margin-bottom: 1rem;
 }
 
 .create-account-button {
@@ -265,121 +355,6 @@ body {
     justify-content: center;
     align-items: center;
 }
-
-/* Laptop Responsiveness */
-
-@media screen and (max-width: 1740px) {
-    .prospect-quick-details,
-    .prospect-quick-details-headers {
-        width: 65%;
-    }
-
-    .pages {
-        width: 43%;
-    }
-    
-    .options {
-        width: 29%;
-    }
-}
-
-@media screen and (max-width: 1250px) {
-    .prospect-quick-details,
-    .prospect-quick-details-headers {
-        width: 85%;
-    }
-
-    .pages {
-        width: 49%;
-    }
-    
-    .options {
-        width: 33%;
-    }
-}
-
-@media screen and (max-width: 1000px) {
-    body {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .nav {
-        display: none;
-        justify-content: space-evenly;
-    }
-
-    .page-title {
-        text-align: center;
-        margin: 2rem 0;
-    }
-
-    .dashboard-page,
-    .closed-page {
-        margin: 0;
-    }
-
-    .prospects-page {
-        margin: 2rem 0;
-    }
-    
-    .prospect-settings {
-        background-color: var(--secondary-color);
-        padding: 0.5rem 0;
-        border-radius: 5px;
-    }
-    
-    .prospect-settings-title {
-        background-color: var(--secondary-color);
-        padding: 0.5rem 1rem;
-        border-radius: 5px;
-    }
-
-    .search-bar {
-        margin: 1rem 0;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    .create-prospect {
-        padding: 0.5rem 3rem;
-        margin-top: 1rem;
-    }
-
-    .prospect-name {
-        margin-left: 0;
-        padding: 0.5rem 0;
-    }
-    
-    .prospect-quick-details-headers,
-    .prospect-quick-details {
-        display: none;
-    }
-
-    .utilities-bar {
-        flex-direction: column;
-        justify-content: space-evenly;
-        padding: 0.5rem 0;
-    }
-
-    .sort-label {
-        margin-bottom: 1rem;
-        padding: 0;
-    }
-    
-    .sort-button {
-        padding: 0.25rem 0.75rem;
-        margin: 0 0.25rem;
-        background-color: rgb(212, 212, 212);
-        border-radius: 5px;
-    }
-}
-
-/* HAMBURGER MENU */
-
-
 
 .prospect-item {
     display: flex;
@@ -554,6 +529,10 @@ hr {
     cursor: pointer;
     background-color: var(--primary-color);
     color: white;
+}
+
+.format-change {
+    display: none;
 }
 
 .follow-up-title {
@@ -860,3 +839,306 @@ hr {
   }
 
 /* SETTINGS PAGE */
+
+
+/* Laptop Responsiveness */
+
+@media screen and (max-width: 1740px) {
+    .prospect-quick-details,
+    .prospect-quick-details-headers {
+        width: 65%;
+    }
+
+    .pages {
+        width: 43%;
+    }
+    
+    .options {
+        width: 29%;
+    }
+}
+
+@media screen and (max-width: 1250px) {
+    .prospect-quick-details,
+    .prospect-quick-details-headers {
+        width: 85%;
+    }
+
+    .pages {
+        width: 49%;
+    }
+    
+    .options {
+        width: 33%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--tertiary-color);
+    }
+
+    .login-container {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    .login-button {
+        font-size: 1rem;
+        padding: 0.75rem 5rem
+    }
+
+    .create-account-button {
+        font-size: 1rem;
+    }
+
+    .username-input {
+        font-size: 1rem;
+    }
+
+    .password-input {
+        margin: 1rem 0;
+        font-size: 1rem;
+    }
+
+    .name-input {
+        font-size: 1rem;
+    }
+
+    .password-input2 {
+        font-size: 1rem;
+    }
+
+    .nav {
+        display: none;
+    }
+
+    .hamburger-nav {
+        width: 100%;
+        margin: 1rem 0;
+        display: flex;
+        justify-content: end;
+        align-items: center;
+    }
+
+    .hamburger {
+        margin-right: 1rem;
+    }
+
+    .page-title {
+        text-align: center;
+        margin: 2rem 0;
+    }
+
+    .dashboard-page,
+    .closed-page {
+        margin: 0;
+    }
+
+    .closed-page {
+        margin-bottom: 4rem;
+    }
+
+    .prospects-page {
+        margin: 2rem 0;
+    }
+    
+    .prospect-settings {
+        background-color: var(--secondary-color);
+        padding: 0.5rem 0;
+        border-radius: 5px;
+    }
+    
+    .prospect-settings-title {
+        background-color: var(--secondary-color);
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+    }
+
+    .prospect-headers {
+        margin: 0;
+    }
+
+    .prospect-item {
+        margin: 0.5rem 0;
+    }
+
+    .search-bar {
+        margin: 1rem 0;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .prospect-name {
+        margin-left: 0.5;
+        padding: 0.5rem 0;
+    }
+    
+    .prospect-quick-details-headers,
+    .prospect-quick-details {
+        display: none;
+    }
+
+    .search-input {
+        margin-bottom: 1rem;
+    }
+
+    .utilities-bar {
+        flex-direction: column;
+        justify-content: space-evenly;
+        padding: 0.5rem 0;
+    }
+
+    .sort-label {
+        margin-bottom: 1rem;
+        padding: 0;
+    }
+    
+    .sort-button {
+        padding: 0.25rem 0.75rem;
+        margin: 0 0.25rem;
+        background-color: rgb(212, 212, 212);
+        border-radius: 5px;
+        font-size: 0.8rem;
+    }
+
+    .days-grid {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+
+    .day {
+        min-height: 0;
+        width: 100%;
+    }
+
+    .today {
+        border-radius: 5px;
+        box-shadow:0 8px 20px rgba(0, 0, 0, 0.6);
+    }
+    
+    .day-title {
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+    hr {
+        display: none;
+    }
+
+    .current-date {
+        font-size: 1.63rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .follow-up-title,
+    .current-date {
+        text-align: center;
+    }
+
+    .format-change {
+        display: inline-block;
+    }
+    
+    .day-items {
+        margin: 0.5rem 0;
+    }
+    
+    .day-content {
+        padding: 0.5rem 0;
+        width: 100%;
+    }
+
+    .prospect-settings-page {
+        margin: 2rem 0;
+    }
+
+    .prospect-settings-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 2rem;
+    }
+
+    .prospect-buttons {
+        justify-content: space-between;
+        width: 80%;
+    }
+
+    .create-prospect {
+        padding: 0.5rem 3rem;
+    }
+
+    .delete-prospect {
+        padding: 0.5rem 2.5rem;
+    }    
+
+    .new-data-grid {
+        grid-gap: 1rem;
+        margin-bottom: 2rem;
+        width: 100%;
+    }
+
+    .data-title {
+        font-size: 1rem;
+        margin-left: 1rem;
+    }
+
+    .required {
+        font-size: 0.75rem;
+    }
+
+    .check-box-title {
+        margin-bottom: 1rem;
+    }
+
+    .check-boxes-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        justify-content: center;
+        align-items: center;
+        margin-right: 1rem;
+    }
+
+    .check-box-label {
+        font-size: 0.75rem;
+        margin-left: 5px;
+    }
+
+    .notes-field {
+        margin-right: 1rem;
+        width: 90%;
+    }
+
+    .extension {
+        white-space: nowrap;
+    }
+
+    .information-form {
+        width: 100%;
+    }
+
+    .new-data-value {
+        width: 90%;
+    }
+
+    .option-box {
+        width: 90%;
+    }
+}
+

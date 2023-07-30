@@ -56,7 +56,7 @@ export default function Calendar() {
                                 <div className="day-title">
                                     <h2 className="date">{date}</h2>
                                     <hr />
-                                    <h2>{moment().day(index + 1).format('dddd')}</h2>
+                                    <h2>{moment().day(index + 1).format('dddd')}<span className='format-change'>,&nbsp;</span></h2>
                                 </div>
                                 {filterProspectsByDate(date).map((prospect) => (
                                     <div className="day-items">

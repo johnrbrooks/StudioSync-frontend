@@ -69,7 +69,7 @@ export default function Login() {
                 <form action="" className="login-form" onSubmit={handleSubmit}>
                     <input type="text" placeholder='Username' className='username-input' id='username' onChange={handleChange} value={formState.username}/>
                     <input type="password" placeholder='Password' className='password-input' id='password' onChange={handleChange} value={formState.password}/>
-                    <p className="error-message">{message}</p>
+                    {message !== '' ? <p className="error-message">{message}</p> : null}
                     <button className="login-button" type='submit'>Log in</button>
                 </form>
                 <p className="inquiry-note">Don't have an account?</p>

@@ -150,7 +150,7 @@ export default function ProspectItem() {
                                     <option value="Negotiation">Negotiation</option>
                                     <option value="Closed">Closed</option>
                                 </select>
-                                <h3 className="data-title">Probability:<span className='required'> *</span></h3>
+                                <h3 className="data-title extension">Probability:<span className='required'> *</span></h3>
                                 <select name="probability" id="stage" className='option-box' disabled={!isEditMode} value={formData.probability} onChange={handleChange}>
                                     <option></option>
                                     <option>0</option>
@@ -211,7 +211,7 @@ export default function ProspectItem() {
                                         </div>
                                     </div>
                                 </div>
-                                <h3 className="data-title">Next Follow-Up</h3>
+                                <h3 className="data-title">Next Follow-Up:</h3>
                                 <input type="date" className='new-data-value' name='next_follow_up' disabled={!isEditMode} value={formData.next_follow_up} onChange={handleChange}/>
                                 <h3 className="data-title">Notes:</h3>
                                 <textarea id="" cols="30" rows="10" name='notes' className='notes-field' disabled={!isEditMode} value={formData.notes} onChange={handleChange}></textarea>

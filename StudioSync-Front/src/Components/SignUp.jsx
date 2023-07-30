@@ -81,7 +81,7 @@ export default function SignUp() {
                     <input type="text" placeholder='Username' className='username-input' id='username' onChange={handleChange} value={formState.username}/>
                     <input type="password" placeholder='Password' className='password-input' id='password' onChange={handleChange} value={formState.password}/>
                     <input type="password" placeholder='Confirm Password' className='password-input2' id='confirmpassword' onChange={handleChange} value={formState.confirmpassword}/>
-                    <p className="error-message">{message}</p>
+                    {message !== '' ? <p className="error-message">{message}</p> : null}
                     <div className='sign-up-buttons-container'>
                         <button className="login-button" type='submit'>Create Account</button>
                         <Link to="/login" className='back-button'>Back to login</Link>
