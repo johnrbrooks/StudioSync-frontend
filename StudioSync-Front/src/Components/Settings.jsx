@@ -82,7 +82,6 @@ export default function Settings() {
             const formattedData = { ...formData, mode: JSON.parse(formData.mode) }
             try {
                 const updateUser = await axios.put(`${BASE_URL}users/update/${currentUser._id}`, formattedData)
-                console.log(updateUser)
                 if(updateUser){
                     setPasswordEdit(false)
                     setSuccess(true)
@@ -113,8 +112,6 @@ export default function Settings() {
             console.error('Error updating user:', error)
         }
     }
-
-    console.log(formData)
 
     return (
         <div>

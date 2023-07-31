@@ -23,13 +23,13 @@ export default function Nav() {
 
     const handleLogOut = () => {
         setIsLoggingOut(true)
-        setIsLoggedIn(false)
-        setCurrentUser(null)
-        setUserProspects([])
-        setAllProspects([])
-        sessionStorage.removeItem("currentUser")
-        sessionStorage.setItem("isLoggedIn", "false")
         setTimeout(() => {
+            setIsLoggedIn(false)
+            setCurrentUser(null)
+            setUserProspects([])
+            setAllProspects([])
+            sessionStorage.removeItem("currentUser")
+            sessionStorage.setItem("isLoggedIn", "false")
             setShowMenu(false)
             navigate('/login')
         }, 2000)
@@ -42,11 +42,12 @@ export default function Nav() {
                     <div className="bar"></div>
                 </button>
             </div>
-            <div class={`menu-container ${showMenu ? 'is-active' : ''}`}>
+            <div className={`menu-container ${showMenu ? 'is-active' : ''}`}>
                 <Link to="/dashboard" className={`nav-menu-item ${isActive === '/dashboard' ? 'menu-active' : ''}`} onClick={toggleMenu}>Dashboard</Link>
                 <Link to="/calendar" className={`nav-menu-item ${isActive === '/calendar' ? 'menu-active' : ''}`} onClick={toggleMenu}>Calendar</Link>
                 <Link to="/prospects" className={`nav-menu-item ${isActive === '/prospects' ? 'menu-active' : ''}`} onClick={toggleMenu}>Prospects</Link>
                 <Link to="/settings" className={`nav-menu-item ${isActive === '/settings' ? 'menu-active' : ''}`} onClick={toggleMenu}>Settings</Link>
+                <Link to="/data" className={`nav-menu-item ${isActive === '/data' ? 'menu-active' : ''}`} onClick={toggleMenu}>Data Overview</Link>
                 {isLoggingOut ? (
                                 <ReactLoading type="bars" color="#0400D9" height={50} width={50} />
                             ) : (
@@ -58,6 +59,7 @@ export default function Nav() {
                         <Link to="/dashboard" className={`nav-item ${isActive === '/dashboard' ? 'active' : ''}`}>Dashboard</Link>
                         <Link to="/calendar" className={`nav-item ${isActive === '/calendar' ? 'active' : ''}`}>Calendar</Link>
                         <Link to="/prospects" className={`nav-item ${isActive === '/prospects' ? 'active' : ''}`}>Prospects</Link>
+                        <Link to="/data" className={`nav-item ${isActive === '/data' ? 'active' : ''}`}>Data Overview</Link>
                     </div>
                     <div className="options">
                         <Link to="/settings" className={`nav-item ${isActive === '/settings' ? 'active' : ''}`}>Settings</Link>

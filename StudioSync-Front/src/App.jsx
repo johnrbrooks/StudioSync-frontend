@@ -7,6 +7,7 @@ import Dashboard from './Components/Dashboard'
 import Prospects from './Components/Prospects'
 import Settings from './Components/Settings'
 import Calendar from './Components/Calendar'
+import DataOverview from './Components/DataOverview'
 import ProspectItem from './Components/ProspectItem'
 import NewProspect from './Components/NewProspect'
 import axios from 'axios'
@@ -82,6 +83,7 @@ function App() {
         <Route exact path="/dashboard" element={<Dashboard />}/>
         <Route exact path="/calendar" element={<Calendar />}/>
         <Route exact path="/prospects" element={<Prospects />}/>
+        <Route exact path="/data" element={<DataOverview />}/>
         <Route exact path="/settings" element={<Settings />}/>
         <Route exact path="/prospects/:id" element={<ProspectItem />}/>
         <Route exact path="/prospects/newprospect" element={<NewProspect />}/>

@@ -48,7 +48,6 @@ export default function Login() {
     const getUser = async () => {
         try {
             const response = await axios.get(`${BASE_URL}/users/get/username/${formState.username}`)
-            console.log(response.data)
             return response.data
         } catch (error) {
             console.error(error)

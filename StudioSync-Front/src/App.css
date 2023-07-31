@@ -136,7 +136,7 @@ body {
 }
 
 .pages {
-    width: 32%;
+    width: 42%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -839,6 +839,70 @@ hr {
     filter: brightness(1.1);
   }
 
+/* DATA OVERVIEW PAGE */
+
+.charts-page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sum-data-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2rem;
+    place-items: center center;
+    margin: 3rem 0;
+    width: 40%;
+}
+
+.sum-data-title {
+    font-size: 1.25rem;
+}
+
+.sum-data-value {
+    font-size: 1.25rem;
+}
+
+.charts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    place-items: center center;
+    grid-gap: 2rem;
+    width: 50%;
+    margin-top: 2rem;
+}
+
+.chart-title {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.probability-chart-data,
+.stage-chart-data,
+.services-chart-data {
+    width: 100%;
+}
+
+.bar-chart {
+    margin-top: 3rem;
+    margin-bottom: 6rem;
+    width: 500px;
+}
+
+.data-error {
+    text-align: center;
+}
+
+.good {
+    color: rgb(0, 144, 0);
+}
+
+.bad {
+    color: red;
+}
+
 /* SETTINGS PAGE */
 
 
@@ -851,7 +915,7 @@ hr {
     }
 
     .pages {
-        width: 43%;
+        width: 58%;
     }
     
     .options {
@@ -866,7 +930,7 @@ hr {
     }
 
     .pages {
-        width: 49%;
+        width: 75%;
     }
     
     .options {
@@ -1140,6 +1204,30 @@ hr {
 
     .option-box {
         width: 90%;
+    }
+
+    .charts-grid {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: cneter;
+    }
+
+    .sum-data-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 1rem;
+        place-items: center center;
+        margin: 3rem 0;
+        width: 90%;
+    }
+    
+    .sum-data-title {
+        font-size: 1rem;
+    }
+    
+    .sum-data-value {
+        font-size: 1rem;
     }
 }
 
