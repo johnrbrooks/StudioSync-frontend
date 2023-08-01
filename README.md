@@ -17,7 +17,7 @@ StudioSync is a fully responsive full-stack MERN application that provides recor
 
 ## User Interface
 
-![Dashboard](./StudioSync-Front/src/assets/StudioSyncDashboardPage.png)
+![Dashboard](./StudioSync-Front/src/assets/StudioSyncDashboardPage2.png)
 
 ![Prospect](./StudioSync-Front/src/assets/StudioSyncAddProspectPage.png)
 
