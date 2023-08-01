@@ -122,7 +122,7 @@ export default function Settings() {
                 <div className="prospect-settings-container">
                     <div className="prospect-settings-form">
                         <div className="prospect-settings-headers">
-                            <h2 className="prospect-settings-header">Customer Information</h2>
+                            <h2 className="prospect-settings-header">User Information</h2>
                         </div>
                         <div className="prospect-buttons">
                             <button className="create-prospect prospect-form" onClick={handleEditClick}>Edit</button>
