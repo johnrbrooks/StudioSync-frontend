@@ -243,7 +243,7 @@ export default function DataOverview() {
                     </div>
                 </div>
                 <div className="charts-page-container">
-                    <h1 className="data-title">Sales Analytics</h1>
+                    <h1 className="data-page-title">Sales Analytics</h1>
                     <div className="sum-data-grid">
                         <h3 className="sum-data-title">Closed Sales:</h3>
                         <p className="sum-data-value">{closedSales}</p>
