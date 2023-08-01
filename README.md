@@ -1,4 +1,4 @@
-[Login](./StudioSync-Front/src/assets/StudioSyncLoginPage.png)
+![Login](./StudioSync-Front/src/assets/StudioSyncLoginPage.png)
 
 # StudioSync
 
@@ -17,11 +17,11 @@ StudioSync is a fully responsive full-stack MERN application that provides recor
 
 ## User Interface
 
-[Dashboard](./StudioSync-Front/src/assets/StudioSyncDashboardPage.png)
+![Dashboard](./StudioSync-Front/src/assets/StudioSyncDashboardPage.png)
 
-[Prospect](./StudioSync-Front/src/assets/StudioSyncAddProspectPage.png)
+![Prospect](./StudioSync-Front/src/assets/StudioSyncAddProspectPage.png)
 
-[Data](./StudioSync-Front/src/assets/StudioSyncDataPage.png)
+![Data](./StudioSync-Front/src/assets/StudioSyncDataPage.png)
 
 ## Technologies Used
 
