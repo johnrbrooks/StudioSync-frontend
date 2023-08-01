@@ -28,6 +28,7 @@ export default function Login() {
         setMessage('')
     }
 
+    //Attempt to find the user's based on input, if found, run all login functions, otherwise, generate error message
     const handleSubmit = async(e) => {
         e.preventDefault()
         let foundUser = await getUser()
@@ -45,6 +46,7 @@ export default function Login() {
         }
     }
 
+    //Axios call to find user based on the username submitted in the form
     const getUser = async () => {
         try {
             const response = await axios.get(`${BASE_URL}/users/get/username/${formState.username}`)

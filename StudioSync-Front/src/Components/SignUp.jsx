@@ -26,6 +26,7 @@ export default function SignUp() {
         setMessage('')
     }
 
+    //Make sure the sign up form is filled out, make sure the username doesn't aleady exist, then create user and log in
     const handleSubmit = async (e) => {
         e.preventDefault()
         if (formState.name === '' || formState.username === '' || formState.password === '' || formState.confirmpassword === '') {
@@ -54,6 +55,7 @@ export default function SignUp() {
         }
     }
 
+    //Axios post action to create user with inputted data
     const createUser = async() => {
         let user = await axios.post(`${BASE_URL}/users/create`, {
             name: formState.name,

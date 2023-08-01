@@ -22,6 +22,7 @@ export default function Settings() {
     const formRef = useRef(null)
     const navigate = useNavigate()
 
+    //Get current user's data with Axios call and then pre-fill form state with current data
     useEffect(() => {
         const getUser = async() => {
             const response = await axios.get(`${BASE_URL}users/get/id/${currentUser._id}`)
@@ -36,13 +37,12 @@ export default function Settings() {
         getUser()
     }, [currentUser])
 
-
+    //Determine if the password is being edited and prompt "Confirm Password" if so
     const handleChange = (e) => {
         setErrorMessage('')
         const { name, value } = e.target
         if (name === 'password') {
             if (passwordEdit) {
-                // Allow editing password field when passwordEdit is true
                 setFormData((prevFormData) => ({
                     ...prevFormData,
                     password: value,
@@ -65,9 +65,10 @@ export default function Settings() {
         setPasswordEdit(true);
     };
 
+
+    // Reset the confirmPassword field if the user is not in edit mode
     const handleEditClick = () => {
         setIsEditMode((prevIsEditMode) => !prevIsEditMode);
-        // Reset the confirmPassword field if the user is not in edit mode
         if (!isEditMode) {
           setFormData((prevFormData) => ({
             ...prevFormData,
@@ -76,6 +77,7 @@ export default function Settings() {
         }
       };
     
+    //Ensure password data has been confirmed, then submit to database to update user data
     const updateUser = async(e) => {
         e.preventDefault()
         if(formData.password === formData.confirmPassword) {
@@ -101,6 +103,7 @@ export default function Settings() {
         }
     }
 
+    //Handle delete user and all prospects tied to the user
     const handleDelete = async() => {
         try {
             const deleteUser = await axios.delete(`${BASE_URL}users/delete/${currentUser._id}`)

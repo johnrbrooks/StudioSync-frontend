@@ -13,14 +13,17 @@ export default function Nav() {
 
     const navigate = useNavigate()
 
+    //Set active page state based on url location
     useEffect(() => {
         setIsActive(location.pathname)
     }, [location.pathname])
 
+    //Toggle hamburger menu in mobile mode
     const toggleMenu = () => {
         showMenu ? setShowMenu(false) : setShowMenu(true)
     }
 
+    //Reset all login functions and navigate to login page
     const handleLogOut = () => {
         setIsLoggingOut(true)
         setTimeout(() => {

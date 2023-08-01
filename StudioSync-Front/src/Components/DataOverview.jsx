@@ -20,6 +20,7 @@ export default function DataOverview() {
     const [highestProspect, setHighestProspect] = useState()
     const [lowestProspect, setLowestProspect] = useState()
 
+    //Set the state of the charts
     const[serviceData, setServiceData] = useState({
         labels: [],
         datasets: [{
@@ -44,6 +45,7 @@ export default function DataOverview() {
         }]
     })
 
+    //Count the instances of each stage value and set to state 
     useEffect(() => {
         const stageData = allProspects.flatMap((prospect) => prospect.stage)
         const stageCounts = stageData.reduce((acc, stage) => {
@@ -58,6 +60,7 @@ export default function DataOverview() {
 
     }, [allProspects])
 
+    //Set the Stage data values to build chart
     useEffect(() => {
         setStageData({
             labels: prospectsStageData.map((item) => item.stage),
@@ -75,6 +78,7 @@ export default function DataOverview() {
         })
     }, [prospectsStageData])
 
+    //Count the instances of each probability value and set to state 
     useEffect(() => {
         const probabilityData = allProspects.flatMap((prospect) => prospect.probability)
         const probabilityCounts = probabilityData.reduce((acc, probability) => {
@@ -88,6 +92,8 @@ export default function DataOverview() {
         setProspectsProbabilityData(probabilityCountsArray)
 
     }, [allProspects])
+
+    //Set the probability data to build chart
     useEffect(() => {
         setProbabilityData({
             labels: prospectsProbabilityData.map((item) => item.probability),
@@ -105,6 +111,7 @@ export default function DataOverview() {
         })
     }, [prospectsProbabilityData])
 
+    //Count the instances of each service and set to state
     useEffect(() => {
         const servicesItems = allProspects.flatMap((prospect) => prospect.interested_services)
         setProspectsServicesData(servicesItems)
@@ -125,6 +132,7 @@ export default function DataOverview() {
 
     const [serviceCountsArray, setServiceCountsArray] = useState([])
 
+    //Set the service data to build chart
     useEffect(() => {
         setServiceData({
             labels: serviceCountsArray.map((item) => item.service),
@@ -138,6 +146,7 @@ export default function DataOverview() {
         })
     }, [prospectsServicesData, backgroundColors])
         
+    //Run functions to determine data for Sales Analytics
     useEffect(() => {
         determinePotentialSales()
         determineWeightedSales()

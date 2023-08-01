@@ -15,6 +15,7 @@ export default function Dashboard() {
 
     const navigate = useNavigate()
 
+    //Get the current user's prospect list
     useEffect(() => {
         const getProspects = async() => {
             const response = await axios.get(`${BASE_URL}/prospects/get/userprospects/${currentUser._id}`)
@@ -23,6 +24,7 @@ export default function Dashboard() {
         getProspects()
     }, [currentUser])
 
+    //Get the details of the current user's prospects
     useEffect(() => {
         const fetchProspectDetails = async () => {
             if (userProspects.length === 0) return
@@ -42,6 +44,7 @@ export default function Dashboard() {
         fetchProspectDetails()
       }, [userProspects, currentUser])
 
+    //Toggle the sort direction of the sort buttons
     const handleSort = (newSortType) => {
         if (newSortType === sortType) {
             setSortDirection(sortDirection === 'ascending' ? 'descending' : 'ascending')
@@ -51,6 +54,7 @@ export default function Dashboard() {
         }
     }
 
+    //Sort open prospects list based on switch case parameters
     const sortedProspects = openProspects.slice().sort((a, b) => {
         if(openProspects.length < 2) {
             return openProspects
@@ -73,6 +77,7 @@ export default function Dashboard() {
         }
     });
 
+    //Sort function for closed prospects
     const sortedClosedProspects = closedProspects.slice().sort((a, b) => {
         if(closedProspects.length < 2) {
             return closedProspects

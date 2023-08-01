@@ -16,6 +16,7 @@ export default function Prospects() {
 
     const navigate = useNavigate()
 
+    //Get the current user's prospect list
     useEffect(() => {
         const getProspects = async() => {
             const response = await axios.get(`${BASE_URL}/prospects/get/userprospects/${currentUser._id}`)
@@ -60,7 +61,7 @@ export default function Prospects() {
         };
       }, [userProspects, currentUser]);
 
-
+      //Filter prospect results based on the text input from search bar
       useEffect(() => {
         if (allProspectsUpdated) {
             const updateSearchResults = async () => {
@@ -73,6 +74,7 @@ export default function Prospects() {
         }
     }, [searchQuery, allProspects, allProspectsUpdated])
 
+    //Toggle sort direction based on selected parameter
     const handleSort = (newSortType) => {
         if (newSortType === sortType) {
             setSortDirection(sortDirection === 'ascending' ? 'descending' : 'ascending');
@@ -86,6 +88,7 @@ export default function Prospects() {
         setSearchQuery(e.target.value)
     }
 
+    //Sort open prospects list based on switch case parameters
     const sortedProspects = searchResults.slice().sort((a, b) => {
         if(searchResults.length < 2) {
             return searchResults

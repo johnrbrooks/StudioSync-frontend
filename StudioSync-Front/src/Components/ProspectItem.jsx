@@ -23,6 +23,7 @@ export default function ProspectItem() {
     const formRef = useRef(null)
     const navigate = useNavigate()
 
+    //Get selected prospect data through params, find the prospect with the axios call, set form data with current data
     useEffect(() => {
         const getProspect = async () => {
           try {
@@ -47,6 +48,7 @@ export default function ProspectItem() {
         getProspect();
       }, [key.id, currentUser._id])
 
+    //Update form based on data type entered (check box, text input, selection)
     const handleChange = (e) => {
         setErrorMessage('')
         const { name, value, type, checked } = e.target
@@ -70,6 +72,7 @@ export default function ProspectItem() {
         }
     }
 
+    //Toggle edit mode state
     const handleEditClick = () => {
         if(isEditMode){
             setIsEditMode(false)
@@ -78,6 +81,7 @@ export default function ProspectItem() {
         }
     }
     
+    //Submit form to apply edits to prospect and PUT to database
     const updateProspect = async(e) => {
         e.preventDefault()
         try {
@@ -97,6 +101,7 @@ export default function ProspectItem() {
         }
     }
 
+    //Axios calls to delete the prospect from the database, and the prospect Object ID from the user's pipeline
     const handleDelete = async() => {
         try {
             const updateCurrentUser = await axios.put(`${BASE_URL}/users/${currentUser._id}/removeProspect/${key.id}`)

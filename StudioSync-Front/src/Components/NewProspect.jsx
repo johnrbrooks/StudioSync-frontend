@@ -27,6 +27,7 @@ export default function NewProspect() {
     const [errorMessage, setErrorMessage] = useState('')
     const formRef = useRef(null)
 
+    //Update form state with inputted values, values updated based on type of input (check boxes, text input, selection)
     const handleChange = (e) => {
         setErrorMessage('')
         const { name, value, type, checked } = e.target
@@ -50,6 +51,7 @@ export default function NewProspect() {
         }
     }
 
+    //Check if all required fields are completed, if so make axios call to create prospect, otherwise set error message and specify reason for error
     const createProspect = (e) => {
         e.preventDefault()
         setErrorMessage('')
