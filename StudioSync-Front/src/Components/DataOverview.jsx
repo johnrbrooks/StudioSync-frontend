@@ -56,6 +56,9 @@ export default function DataOverview() {
         }))
         setProspectsStageData(stageCountsArray)
 
+    }, [allProspects])
+
+    useEffect(() => {
         setStageData({
             labels: prospectsStageData.map((item) => item.stage),
             datasets: [{
@@ -70,7 +73,9 @@ export default function DataOverview() {
                 ]
             }]
         })
+    }, [prospectsStageData])
 
+    useEffect(() => {
         const probabilityData = allProspects.flatMap((prospect) => prospect.probability)
         const probabilityCounts = probabilityData.reduce((acc, probability) => {
             acc[probability] = (acc[probability] || 0) + 1
@@ -82,6 +87,8 @@ export default function DataOverview() {
         }))
         setProspectsProbabilityData(probabilityCountsArray)
 
+    }, [allProspects])
+    useEffect(() => {
         setProbabilityData({
             labels: prospectsProbabilityData.map((item) => item.probability),
             datasets: [{
@@ -96,7 +103,9 @@ export default function DataOverview() {
                 ]
             }]
         })
+    }, [prospectsProbabilityData])
 
+    useEffect(() => {
         const servicesItems = allProspects.flatMap((prospect) => prospect.interested_services)
         setProspectsServicesData(servicesItems)
         const serviceCounts = servicesItems.reduce((acc, service) => {
@@ -107,11 +116,16 @@ export default function DataOverview() {
             service,
             count,
         }))
-        setProspectsServicesData(serviceCountsArray)
+        setServiceCountsArray(serviceCountsArray)
         
         determineDataMedian(serviceCountsArray)
         determineColors()
 
+    }, [allProspects, countThreshold])
+
+    const [serviceCountsArray, setServiceCountsArray] = useState([])
+
+    useEffect(() => {
         setServiceData({
             labels: serviceCountsArray.map((item) => item.service),
             datasets: [
@@ -122,7 +136,9 @@ export default function DataOverview() {
                 },
             ],
         })
+    }, [prospectsServicesData, backgroundColors])
         
+    useEffect(() => {
         determinePotentialSales()
         determineWeightedSales()
         determinePercentClosed()
@@ -141,7 +157,7 @@ export default function DataOverview() {
     }
 
     const determineColors = () => {
-        const colors = prospectsServicesData.map((value) => {
+        const colors = serviceCountsArray.map((value) => {
             return value.count > countThreshold ? 'rgba(0, 158, 0, 1)' : 'rgba(164, 0, 0, 1)'
         })
         setBackgroundColors(colors)
