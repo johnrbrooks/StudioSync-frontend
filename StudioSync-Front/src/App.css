@@ -78,10 +78,12 @@ body {
 
 .hamburger.is-active::before {
     transform: rotate(-45deg) translate(-8px, 6px);
+    background-color: white;
 }
 
 .hamburger.is-active::after {
     transform: rotate(45deg) translate(-9px, -8px);
+    background-color: white;
 }
 
 .hamburger.is-active .bar {
@@ -99,7 +101,10 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 98;
-    background-color: var(--secondary-color);
+    background: url('https://www.eastweststudios.com/_images/centerstage_studio-1-control_1@2x.jpg');
+    background-size: cover;
+    background-color: rgb(68, 68, 68);
+    background-blend-mode: multiply;
     transition: 0.4s;
     overflow: hidden;
 }
@@ -921,9 +926,22 @@ hr {
     .options {
         width: 29%;
     }
+
+    .prospect-buttons {
+        width: 25%;
+    }
+
+    .charts-grid {
+        width: 70%;
+    }
+
+    .sum-data-grid {
+        width: 60%;
+    }
+
 }
 
-@media screen and (max-width: 1250px) {
+@media screen and (max-width: 1280px) {
     .prospect-quick-details,
     .prospect-quick-details-headers {
         width: 85%;
@@ -936,9 +954,13 @@ hr {
     .options {
         width: 33%;
     }
+
+    .prospect-buttons {
+        width: 35%;
+    }
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1024px) {
     body {
         display: flex;
         flex-direction: column;
@@ -952,8 +974,9 @@ hr {
         width: 100vw;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: start;
         align-items: center;
+        border-radius: 0;
     }
 
 
@@ -1206,11 +1229,16 @@ hr {
         width: 90%;
     }
 
+    .data-title {
+        font-size: 2rem;
+        margin-top: 2rem;
+    }
+
     .charts-grid {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: cneter;
+        align-items: center;
     }
 
     .sum-data-grid {
@@ -1219,15 +1247,27 @@ hr {
         grid-gap: 1rem;
         place-items: center center;
         margin: 3rem 0;
-        width: 90%;
+        width: 100%;
     }
     
     .sum-data-title {
-        font-size: 1rem;
+        font-size: 0.85rem;
     }
     
     .sum-data-value {
-        font-size: 1rem;
+        font-size: 0.85rem;
+    }
+
+    .probability-chart-data {
+        width: 300px;
+    }
+
+    .stage-chart-data {
+        width: 300px;
+    }
+
+    .bar-chart {
+        width: 325px;
     }
 }
 

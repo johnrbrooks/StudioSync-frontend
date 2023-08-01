@@ -46,8 +46,8 @@ export default function Nav() {
                 <Link to="/dashboard" className={`nav-menu-item ${isActive === '/dashboard' ? 'menu-active' : ''}`} onClick={toggleMenu}>Dashboard</Link>
                 <Link to="/calendar" className={`nav-menu-item ${isActive === '/calendar' ? 'menu-active' : ''}`} onClick={toggleMenu}>Calendar</Link>
                 <Link to="/prospects" className={`nav-menu-item ${isActive === '/prospects' ? 'menu-active' : ''}`} onClick={toggleMenu}>Prospects</Link>
-                <Link to="/settings" className={`nav-menu-item ${isActive === '/settings' ? 'menu-active' : ''}`} onClick={toggleMenu}>Settings</Link>
                 <Link to="/data" className={`nav-menu-item ${isActive === '/data' ? 'menu-active' : ''}`} onClick={toggleMenu}>Data Overview</Link>
+                <Link to="/settings" className={`nav-menu-item ${isActive === '/settings' ? 'menu-active' : ''}`} onClick={toggleMenu}>Settings</Link>
                 {isLoggingOut ? (
                                 <ReactLoading type="bars" color="#0400D9" height={50} width={50} />
                             ) : (

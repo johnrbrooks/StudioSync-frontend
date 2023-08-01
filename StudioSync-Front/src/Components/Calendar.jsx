@@ -8,7 +8,7 @@ export default function Calendar() {
     const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, userProspects, setUserProspects, allProspects, setAllProspects } = useContext(UserContext)
 
     const navigate = useNavigate()
-
+    
     //ChatGPT constructed function to populate days of week with date using Moment.js
     const getNextWeekDates = () => {
         const dates = [];
