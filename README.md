@@ -4,7 +4,7 @@
 
 StudioSync is a fully responsive full-stack MERN application that provides recording studio owners with a comprehensive solution to manage their customer relationships.
 
-[View the app here](studiosync-frontend-production.up.railway.app)
+[View the app here](https://studiosync-frontend-production.up.railway.app/login)
 
 ## Get Started
 
