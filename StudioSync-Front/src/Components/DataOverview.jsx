@@ -130,7 +130,7 @@ export default function DataOverview() {
             labels: serviceCountsArray.map((item) => item.service),
             datasets: [
                 {
-                    label: 'Services Requested',
+                    label: 'Most requested',
                     data: serviceCountsArray.map((item) => item.count),
                     backgroundColor: backgroundColors,
                 },
@@ -199,9 +199,13 @@ export default function DataOverview() {
     const determinePercentClosed = () => {
         const openProspects = allProspects.filter((prospect) => prospect.stage !== 'Closed')
         const closedProspects = allProspects.filter((prospect) => prospect.stage === 'Closed')
-        const percentClosedValue = (closedProspects.length/openProspects.length) * 100
-        const roundedValue = percentClosedValue.toFixed(2)
-        setPercentClosed(parseFloat(roundedValue))
+        if(openProspects.length > 0) {
+            const percentClosedValue = (closedProspects.length/openProspects.length) * 100
+            const roundedValue = percentClosedValue.toFixed(2)
+            setPercentClosed(parseFloat(roundedValue))
+        } else if(closedProspects.length > 0) {
+            setPercentClosed(100)
+        }
     }
 
     const determineClosedTotal = () => {
@@ -239,7 +243,7 @@ export default function DataOverview() {
                     </div>
                 </div>
                 <div className="charts-page-container">
-                    <h1 className="data-title">Sales Analysis</h1>
+                    <h1 className="data-title">Sales Analytics</h1>
                     <div className="sum-data-grid">
                         <h3 className="sum-data-title">Closed Sales:</h3>
                         <p className="sum-data-value">{closedSales}</p>
