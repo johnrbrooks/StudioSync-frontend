@@ -216,7 +216,7 @@ export default function DataOverview() {
             setPercentClosed(100)
         } else if(openProspects.length === 1 && closedProspects.length === 1) {
             setPercentClosed(50)
-        } else if(closedProspects === 0) {
+        } else if(closedProspects.length === 0) {
             setPercentClosed(0)
         }
     }
