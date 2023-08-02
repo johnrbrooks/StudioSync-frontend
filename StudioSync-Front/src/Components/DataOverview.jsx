@@ -188,8 +188,9 @@ export default function DataOverview() {
 
     const determineWeightedSales = () => {
         let projectedSales = 0
-        const projectedValuesArray = allProspects.flatMap((prospect) => prospect.projected_value)
-        const prospectsProbabilityArray = allProspects.flatMap((prospect) => {
+        const openProspects = allProspects.filter((prospect) => prospect.stage !== 'Closed')
+        const projectedValuesArray = openProspects.flatMap((prospect) => prospect.projected_value)
+        const prospectsProbabilityArray = openProspects.flatMap((prospect) => {
             return prospect.probability !== 0 ? prospect.probability / 100 : prospect.probability
         })
         const weightedSalesArray = projectedValuesArray.map((value, index) => {
