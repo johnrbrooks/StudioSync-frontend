@@ -208,12 +208,14 @@ export default function DataOverview() {
     const determinePercentClosed = () => {
         const openProspects = allProspects.filter((prospect) => prospect.stage !== 'Closed')
         const closedProspects = allProspects.filter((prospect) => prospect.stage === 'Closed')
-        if(openProspects.length > 0) {
+        if(openProspects.length > 0 && openProspects.length !== 1) {
             const percentClosedValue = (closedProspects.length/openProspects.length) * 100
             const roundedValue = percentClosedValue.toFixed(2)
             setPercentClosed(parseFloat(roundedValue))
         } else if(closedProspects.length > 0 && openProspects.length === 0) {
             setPercentClosed(100)
+        } else if(openProspects.length === 1 && closedProspects.length === 1) {
+            setPercentClosed(50)
         }
     }
 
