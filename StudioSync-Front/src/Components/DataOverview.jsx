@@ -212,7 +212,7 @@ export default function DataOverview() {
             const percentClosedValue = (closedProspects.length/openProspects.length) * 100
             const roundedValue = percentClosedValue.toFixed(2)
             setPercentClosed(parseFloat(roundedValue))
-        } else if(closedProspects.length > 0) {
+        } else if(closedProspects.length > 0 && openProspects.length === 0) {
             setPercentClosed(100)
         }
     }
