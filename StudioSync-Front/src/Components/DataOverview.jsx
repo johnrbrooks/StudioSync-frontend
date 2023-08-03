@@ -7,6 +7,18 @@ import { Chart as ChartJS } from 'chart.js/auto'
 export default function DataOverview() {
     const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, userProspects, setUserProspects, allProspects, setAllProspects } = useContext(UserContext)
 
+    //Resets currentUser/login data if page refreshes
+    useEffect(() => {
+        if(!currentUser) {
+            const retrievedUser = JSON.parse(sessionStorage.getItem("currentUser"))
+            const retrievedIsLoggedIn =  JSON.parse(sessionStorage.getItem("isLoggedIn"))
+            const retreivedProspects = JSON.parse(sessionStorage.getItem("userProspects"))
+            setAllProspects(retreivedProspects)
+            setCurrentUser(retrievedUser)
+            setIsLoggedIn(retrievedIsLoggedIn)
+        }
+    }, [currentUser, isLoggedIn])
+
     const [prospectsStageData, setProspectsStageData] = useState([])
     const [prospectsProbabilityData, setProspectsProbabilityData] = useState([])
     const [prospectsServicesData, setProspectsServicesData] = useState([])

@@ -10,11 +10,19 @@ import ReactLoading from 'react-loading'
 
 export default function Settings() {
     const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn } = useContext(UserContext)
-
+    
+    const initialFormData = {
+        name: '',
+        username: '',
+        password: '',
+        confirmPassword: '',
+        mode: 'true',
+    }
+    
     const [success, setSuccess] = useState(false)
     const [successMessage, setSuccessMessage] = useState('')
     const [errorMessage, setErrorMessage] = useState('')
-    const [formData, setFormData] = useState({})
+    const [formData, setFormData] = useState(initialFormData)
     const [isEditMode, setIsEditMode] = useState(false)
     const [passwordEdit, setPasswordEdit] = useState(false)
     const [showDeleteModal, setShowDeleteModal] = useState(false)
@@ -22,10 +30,12 @@ export default function Settings() {
     const formRef = useRef(null)
     const navigate = useNavigate()
 
+
     //Get current user's data with Axios call and then pre-fill form state with current data
     useEffect(() => {
         const getUser = async() => {
-            const response = await axios.get(`${BASE_URL}users/get/id/${currentUser._id}`)
+            const retrievedUser = JSON.parse(sessionStorage.getItem("currentUser"))
+            const response = await axios.get(`${BASE_URL}users/get/id/${retrievedUser._id}`)
             setFormData({
                 name: response.data.name,
                 username: response.data.username,
@@ -62,20 +72,24 @@ export default function Settings() {
     }
 
     const handlePasswordClick = () => {
-        setPasswordEdit(true);
-    };
+        setPasswordEdit(true)
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            confirmPassword: prevFormData.password,
+        }))
+    }
 
 
     // Reset the confirmPassword field if the user is not in edit mode
     const handleEditClick = () => {
-        setIsEditMode((prevIsEditMode) => !prevIsEditMode);
+        setIsEditMode((prevIsEditMode) => !prevIsEditMode)
         if (!isEditMode) {
           setFormData((prevFormData) => ({
             ...prevFormData,
             confirmPassword: prevFormData.password,
-          }));
+          }))
         }
-      };
+      }
     
     //Ensure password data has been confirmed, then submit to database to update user data
     const updateUser = async(e) => {
@@ -150,7 +164,7 @@ export default function Settings() {
                                 {passwordEdit && (
                                     <>
                                         <h3 className="data-title">Confirm Password:<span className='required'> *</span></h3>
-                                        <input type="password" className='new-data-value' placeholder='Confirm Password' name='confirmPassword' disabled={!isEditMode} onChange={handleChange}/>
+                                        <input type="password" className='new-data-value' placeholder='Confirm Password' name='confirmPassword' value={formData.confirmPassword} disabled={!isEditMode} onChange={handleChange}/>
                                     </>)}
                                 <h3 className="data-title">Mode:<span className='required'> *</span></h3>
                                 <select name="mode" className='option-box' disabled={!isEditMode} value={formData.mode} onChange={handleChange}>

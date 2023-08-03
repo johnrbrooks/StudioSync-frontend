@@ -19,7 +19,8 @@ export default function Prospects() {
     //Get the current user's prospect list
     useEffect(() => {
         const getProspects = async() => {
-            const response = await axios.get(`${BASE_URL}/prospects/get/userprospects/${currentUser._id}`)
+            const retrievedUser = JSON.parse(sessionStorage.getItem("currentUser"))
+            const response = await axios.get(`${BASE_URL}/prospects/get/userprospects/${retrievedUser._id}`)
             setUserProspects(response.data)
         }
         getProspects()

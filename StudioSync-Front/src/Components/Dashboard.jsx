@@ -15,10 +15,12 @@ export default function Dashboard() {
 
     const navigate = useNavigate()
 
+
     //Get the current user's prospect list
     useEffect(() => {
         const getProspects = async() => {
-            const response = await axios.get(`${BASE_URL}/prospects/get/userprospects/${currentUser._id}`)
+            const retrievedUser = JSON.parse(sessionStorage.getItem("currentUser"))
+            const response = await axios.get(`${BASE_URL}/prospects/get/userprospects/${retrievedUser._id}`)
             setUserProspects(response.data)
         }
         getProspects()
@@ -33,6 +35,7 @@ export default function Dashboard() {
                 const prospectDetails = await Promise.all(userProspects.map((prospectId) => axios.get(`${BASE_URL}/prospects/get/${prospectId}`)))
                 const prospectData = prospectDetails.map((response) => response.data)
                 setAllProspects(prospectData)
+                sessionStorage.setItem("userProspects", JSON.stringify(prospectData))
                 const openProspects = prospectData.filter((prospect) => prospect.stage !== 'Closed')
                 const closedProspects = prospectData.filter((prospect) => prospect.stage === 'Closed')
                 setOpenProspects(openProspects)
@@ -200,7 +203,7 @@ export default function Dashboard() {
                         </div>
                     ) : sortedClosedProspects.length > 0 ? (
                         sortedClosedProspects.map((prospect) => (
-                        <div className={`prospect-item ${prospect.probability === 0 ? 'item-prospect' : prospect.probability === 30 ? 'item-unlikely' : prospect.probability === 50 ? 'item-possible' : prospect.probability === 90 ? 'item-likely' : prospect.probability === 100 ? 'item-closed' : ''}`} key={prospect.id} onClick={() => handleSelection(prospect)}>
+                        <div className={`prospect-item ${prospect.probability === 0 ? 'item-prospect' : prospect.probability === 30 ? 'item-unlikely' : prospect.probability === 50 ? 'item-possible' : prospect.probability === 90 ? 'item-likely' : prospect.probability === 100 ? 'item-closed' : ''}`} key={prospect._id} onClick={() => handleSelection(prospect)}>
                             <div className="prospect-name">
                                 <h3>{prospect.contact_name}</h3>
                             </div>

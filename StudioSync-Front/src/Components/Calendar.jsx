@@ -8,6 +8,18 @@ export default function Calendar() {
     const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, userProspects, setUserProspects, allProspects, setAllProspects } = useContext(UserContext)
 
     const navigate = useNavigate()
+
+    //Resets currentUser/login data if page refreshes
+    useEffect(() => {
+        if(!currentUser) {
+            const retrievedUser = JSON.parse(sessionStorage.getItem("currentUser"))
+            const retrievedIsLoggedIn =  JSON.parse(sessionStorage.getItem("isLoggedIn"))
+            const retrievedProspects = JSON.parse(sessionStorage.getItem("userProspects"))
+            setAllProspects(retrievedProspects)
+            setCurrentUser(retrievedUser)
+            setIsLoggedIn(retrievedIsLoggedIn)
+        }
+    }, [currentUser, isLoggedIn])
     
     //ChatGPT constructed function to populate days of week with date using Moment.js
     const getNextWeekDates = () => {
@@ -60,7 +72,7 @@ export default function Calendar() {
                                 </div>
                                 {filterProspectsByDate(date).map((prospect) => (
                                     <div className="day-items">
-                                        <div key={prospect.id} onClick={() => handleSelection(prospect)} className='day-content'>
+                                        <div key={prospect._id} onClick={() => handleSelection(prospect)} className='day-content'>
                                             <p>{prospect.contact_name}</p>
                                         </div>
                                     </div>
