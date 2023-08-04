@@ -31,6 +31,10 @@ export default function Login() {
     //Attempt to find the user's based on input, if found, run all login functions, otherwise, generate error message
     const handleSubmit = async(e) => {
         e.preventDefault()
+        if(formState.username === '' || formState.password === '') {
+            setMessage('All fields are required.')
+            return
+        }
         let foundUser = await getUser()
         if(foundUser && foundUser.password === formState.password) {
             setSuccess(true)
