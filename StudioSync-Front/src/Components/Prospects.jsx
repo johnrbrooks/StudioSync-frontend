@@ -128,7 +128,7 @@ export default function Prospects() {
                 </div>
                 <div className="search-bar">
                     <div className="search-bar-container">
-                        <input type="text" className="search-input" placeholder="Search Prospects..." value={searchQuery} onChange={handleChange}/>
+                        <input type="text" className="search-input" autoFocus placeholder="Search Prospects..." value={searchQuery} onChange={handleChange}/>
                     </div>
                     <button className="create-prospect" onClick={() => {handleClick()}}>New</button>
                 </div>

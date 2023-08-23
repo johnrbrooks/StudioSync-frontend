@@ -559,7 +559,7 @@ hr {
 
 .prospect-settings-title {
     background-color: var(--secondary-color);
-    padding: 0.5rem 1rem;
+    padding: 0 1rem;
     border-radius: 5px;
 }
 
@@ -1153,6 +1153,7 @@ hr {
 
     .prospect-settings-page {
         margin: 2rem 0;
+        width: 90vw;
     }
 
     .prospect-settings-container {
@@ -1177,6 +1178,8 @@ hr {
     }    
 
     .new-data-grid {
+        display: flex;
+        flex-direction: column;
         grid-gap: 1rem;
         margin-bottom: 2rem;
         width: 100%;
@@ -1184,7 +1187,9 @@ hr {
 
     .data-title {
         font-size: 1rem;
-        margin-left: 1rem;
+        margin-left: 3rem;
+        width: 100%;
+        text-align: left;
     }
 
     .required {
@@ -1193,6 +1198,8 @@ hr {
 
     .check-box-title {
         margin-bottom: 1rem;
+        margin-left: 1.35rem;
+        font-size: 0.8rem;
     }
 
     .check-boxes-grid {
@@ -1200,7 +1207,9 @@ hr {
         grid-template-columns: 1fr 1fr 1fr;
         justify-content: center;
         align-items: center;
+        grid-gap: 0.75rem;
         margin-right: 1rem;
+        margin-left: 1.35rem;
     }
 
     .check-box-label {
@@ -1211,6 +1220,12 @@ hr {
     .notes-field {
         margin-right: 1rem;
         width: 90%;
+        margin-left: 1.35rem;
+        padding: 0.25rem;
+    }
+
+    .error-message2 {
+        margin: 1rem 2rem;
     }
 
     .extension {
