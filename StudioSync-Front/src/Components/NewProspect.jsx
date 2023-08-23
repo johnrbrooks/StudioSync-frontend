@@ -7,7 +7,19 @@ import moment from 'moment'
 import ReactLoading from 'react-loading'
 
 export default function NewProspect() {
-    const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn } = useContext(UserContext)
+    const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, userProspects, setUserProspects, allProspects, setAllProspects } = useContext(UserContext)
+
+    //Resets currentUser/login data if page refreshes
+    useEffect(() => {
+        if(!currentUser) {
+            const retrievedUser = JSON.parse(sessionStorage.getItem("currentUser"))
+            const retrievedIsLoggedIn =  JSON.parse(sessionStorage.getItem("isLoggedIn"))
+            const retreivedProspects = JSON.parse(sessionStorage.getItem("userProspects"))
+            setAllProspects(retreivedProspects)
+            setCurrentUser(retrievedUser)
+            setIsLoggedIn(retrievedIsLoggedIn)
+        }
+    }, [currentUser, isLoggedIn])
 
     const [formData, setFormData] = useState({
         user_pipeline: currentUser._id,

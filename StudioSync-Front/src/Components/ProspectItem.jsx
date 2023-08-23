@@ -9,7 +9,19 @@ import ReactLoading from 'react-loading'
 
 
 export default function ProspectItem() {
-    const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn } = useContext(UserContext)
+    const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, userProspects, setUserProspects, allProspects, setAllProspects } = useContext(UserContext)
+
+    //Resets currentUser/login data if page refreshes
+    useEffect(() => {
+        if(!currentUser) {
+            const retrievedUser = JSON.parse(sessionStorage.getItem("currentUser"))
+            const retrievedIsLoggedIn =  JSON.parse(sessionStorage.getItem("isLoggedIn"))
+            const retreivedProspects = JSON.parse(sessionStorage.getItem("userProspects"))
+            setAllProspects(retreivedProspects)
+            setCurrentUser(retrievedUser)
+            setIsLoggedIn(retrievedIsLoggedIn)
+        }
+    }, [currentUser, isLoggedIn])
 
     const [prospect, setProspect] = useState()
     const [success, setSuccess] = useState(false)
@@ -40,12 +52,12 @@ export default function ProspectItem() {
               interested_services: response.data.interested_services,
               next_follow_up: response.data.next_follow_up,
               notes: response.data.notes,
-            });
+            })
           } catch (error) {
             console.error('Error fetching prospect:', error)
           }
-        };
-        getProspect();
+        }
+        getProspect()
       }, [key.id, currentUser._id])
 
     //Update form based on data type entered (check box, text input, selection)
