@@ -3,6 +3,7 @@ import { useState, useEffect, useContext } from 'react'
 import { UserContext, BASE_URL } from '../App'
 import { useNavigate } from 'react-router-dom'
 import moment from 'moment'
+import axios from 'axios'
 
 export default function Calendar() {
     const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, userProspects, setUserProspects, allProspects, setAllProspects } = useContext(UserContext)
@@ -20,6 +21,20 @@ export default function Calendar() {
             setIsLoggedIn(retrievedIsLoggedIn)
         }
     }, [currentUser, isLoggedIn])
+
+    useEffect(() => {
+        const fetchProspectDetails = async () => {
+            if (userProspects.length === 0) return
+            try {
+                const prospectDetails = await Promise.all(userProspects.map((prospectId) => axios.get(`${BASE_URL}/prospects/get/${prospectId}`)))
+                const prospectData = prospectDetails.map((response) => response.data)
+                setAllProspects(prospectData)
+            } catch (error) {
+                console.error('Error fetching prospect details:', error)
+            }
+        }
+        fetchProspectDetails()
+      }, [userProspects, currentUser])
     
     //ChatGPT constructed function to populate days of week with date using Moment.js
     const getNextWeekDates = () => {

@@ -177,7 +177,7 @@ export default function ProspectItem() {
                                     <option>100</option>
                                 </select>
                                 <h3 className="data-title">Projected Value:<span className='required'> *</span></h3>
-                                <input type="text" className='new-data-value' placeholder='500' name='projected_value' disabled={!isEditMode} value={formData.projected_value} onChange={handleChange}/>
+                                <input type="number" className='new-data-value' placeholder='500' name='projected_value' disabled={!isEditMode} value={formData.projected_value} onChange={handleChange}/>
                                 <h3 className="data-title">Interested Services:</h3>
                                 <div className="check-boxes-container">
                                     <p className='check-box-title'>Check all that apply:</p>

@@ -770,8 +770,12 @@ hr {
 }
 
 .option-box {
-    padding: 0.25rem 0.5rem;
+    padding: 0.25rem 0.25rem;
     width: 70%;
+}
+
+.notes-field {
+    padding: 0.5rem;
 }
 
 .prospect-form {
