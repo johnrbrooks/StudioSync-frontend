@@ -570,6 +570,14 @@ hr {
     align-items: center;
 }
 
+.new-button-bar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    margin-top: 2rem;
+}
+
 .create-prospect {
     padding: 0.5rem 3rem;
     font-family: 'Fira Sans', sans-serif;

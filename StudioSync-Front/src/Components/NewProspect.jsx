@@ -131,6 +131,7 @@ export default function NewProspect() {
                                     <option value="Qualified">Qualified</option>
                                     <option value="Proposal">Proposal</option>
                                     <option value="Negotiation">Negotiation</option>
+                                    <option value ="WIP">WIP</option>
                                     <option value="Closed">Closed</option>
                                 </select>
                                 <h3 className="data-title">Probability:<span className='required'> *</span></h3>

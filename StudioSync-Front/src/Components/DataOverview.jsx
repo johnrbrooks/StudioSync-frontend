@@ -24,6 +24,7 @@ export default function DataOverview() {
     const [prospectsServicesData, setProspectsServicesData] = useState([])
     const [countThreshold, setCountThreshold] = useState()
     const [backgroundColors, setBackgroundColors] = useState() 
+    const [stageColors, setStageColors] = useState() 
 
     const [potentialSales, setPotentialSales] = useState()
     const [weightedSales, setWeightedSales] = useState()
@@ -69,6 +70,7 @@ export default function DataOverview() {
             count,
         }))
         setProspectsStageData(stageCountsArray)
+        determineStageColors(stageCountsArray)
 
     }, [allProspects])
 
@@ -79,16 +81,10 @@ export default function DataOverview() {
             datasets: [{
                 label: 'Prospect Stage Distribution',
                 data: prospectsStageData.map((item) => item.count),
-                backgroundColor: [
-                    'rgb(164, 0, 0)',
-                    'rgb(205, 133, 0)',
-                    'rgb(73, 213, 73)',
-                    'rgb(0, 158, 0)',
-                    'rgb(0, 97, 0)',
-                ]
+                backgroundColor: stageColors
             }]
         })
-    }, [prospectsStageData])
+    }, [prospectsStageData, stageColors])
 
     //Count the instances of each probability value and set to state 
     useEffect(() => {
@@ -184,9 +180,16 @@ export default function DataOverview() {
         setBackgroundColors(colors)
     }
 
+    const determineStageColors = (stageCountsArray) => {
+        const colors = stageCountsArray.map((prospect) => {
+            return prospect.stage === 'Unqualified' ? 'rgb(164, 0, 0)' : prospect.stage === 'Qualified' ? 'rgb(205, 133, 0)' : prospect.stage === 'Proposal' ? 'rgb(73, 213, 73)' : prospect.stage === 'Negotiation' ? 'rgb(0, 158, 0)' : prospect.stage === 'WIP' ? 'rgb(0, 97, 0)' : prospect.stage === 'Closed' ? 'rgb(164, 0, 0)' : ''
+        })
+        setStageColors(colors)
+    }
+
     const determinePotentialSales = () => {
         let projectedSales = 0
-        const openProspects = allProspects.filter((prospect) => prospect.stage !== 'Closed')
+        const openProspects = allProspects.filter((prospect) => prospect.stage !== 'WIP')
         const projectedValuesArray = openProspects.flatMap((prospect) => prospect.projected_value)
         projectedValuesArray.forEach((number) => {
             projectedSales += number
@@ -200,7 +203,7 @@ export default function DataOverview() {
 
     const determineWeightedSales = () => {
         let projectedSales = 0
-        const openProspects = allProspects.filter((prospect) => prospect.stage !== 'Closed')
+        const openProspects = allProspects.filter((prospect) => prospect.stage !== 'WIP')
         const projectedValuesArray = openProspects.flatMap((prospect) => prospect.projected_value)
         const prospectsProbabilityArray = openProspects.flatMap((prospect) => {
             return prospect.probability !== 0 ? prospect.probability / 100 : prospect.probability
@@ -219,8 +222,8 @@ export default function DataOverview() {
     }
 
     const determinePercentClosed = () => {
-        const openProspects = allProspects.filter((prospect) => prospect.stage !== 'Closed')
-        const closedProspects = allProspects.filter((prospect) => prospect.stage === 'Closed')
+        const openProspects = allProspects.filter((prospect) => prospect.stage !== 'WIP' || 'Closed')
+        const closedProspects = allProspects.filter((prospect) => prospect.stage === 'WIP')
         if(openProspects.length > 0 && openProspects.length !== 1) {
             const percentClosedValue = (closedProspects.length/openProspects.length) * 100
             const roundedValue = percentClosedValue.toFixed(2)
@@ -236,7 +239,7 @@ export default function DataOverview() {
 
     const determineClosedTotal = () => {
         let totalSales = 0
-        const closedProspects = allProspects.filter((prospect) => prospect.stage === 'Closed')
+        const closedProspects = allProspects.filter((prospect) => prospect.stage === 'WIP')
         const closedValuesArray = closedProspects.flatMap((prospect) => prospect.projected_value)
         closedValuesArray.forEach((number) => {
             totalSales += number
@@ -271,13 +274,13 @@ export default function DataOverview() {
                 <div className="charts-page-container">
                     <h1 className="data-page-title">Sales Analytics</h1>
                     <div className="sum-data-grid">
-                        <h3 className="sum-data-title">Closed Sales:</h3>
+                        <h3 className="sum-data-title">Won Sales:</h3>
                         <p className="sum-data-value">{closedSales}</p>
                         <h3 className="sum-data-title">Potential Sales:</h3>
                         <p className="sum-data-value">{potentialSales}</p>
                         <h3 className="sum-data-title">Weighted Sales:</h3>
                         <p className="sum-data-value">{weightedSales}</p>
-                        <h3 className="sum-data-title">Percent Closed:</h3>
+                        <h3 className="sum-data-title">Percent Won:</h3>
                         <p className={`sum-data-value ${percentClosed >= 50 ? 'good' : 'bad'}`}>{percentClosed}%</p>
                         <h3 className="sum-data-title">Highest Value Prospect:</h3>
                         <p className="sum-data-value">{highestProspect ? `${highestProspect.contact_name} (${highestProspect.projected_value.toLocaleString('en-US', { style: 'currency', currency: 'USD' })})` : 'N/A'}</p>
