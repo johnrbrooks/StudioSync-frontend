@@ -203,7 +203,7 @@ export default function Dashboard() {
             </div>
 
 
-            <div className="closed-page">
+            <div className="wip-page">
                 <div className="utilities-bar">
                     <div className="sort-by">
                         <h4 className='sort-label'>Sort By:</h4>
@@ -244,7 +244,7 @@ export default function Dashboard() {
                                     {prospect?.email.slice(0, 15)}
                                     {prospect?.email.length > 15 && '...'}
                                 </p>
-                                <p className={`quick-stage ${prospect.stage === 'Unqualified' ? 'unqualified' : prospect.stage === 'Qualified' ? 'qualified' : prospect.stage === 'Proposal' ? 'proposal' : prospect.stage === 'Negotiation' ? 'negotiation' : prospect.stage === 'Closed' ? 'unqualified' : prospect.stage === 'WIP' ? 'negotiation' : ''}`}>
+                                <p className={`quick-stage ${prospect.stage === 'Unqualified' ? 'unqualified' : prospect.stage === 'Qualified' ? 'qualified' : prospect.stage === 'Proposal' ? 'proposal' : prospect.stage === 'Negotiation' ? 'negotiation' : prospect.stage === 'Closed' ? 'unqualified' : prospect.stage === 'WIP' ? 'won' : ''}`}>
                                     {prospect.stage}</p>
                                 <p className={`quick-probability ${prospect.probability === 0 ? 'prospect' : prospect.probability === 30 ? 'unlikely' : prospect.probability === 50 ? 'possible' : prospect.probability === 90 ? 'likely' : prospect.probability === 100 ? 'won' : ''}`}>{prospect.probability}%</p>
                                 <p className='quick-value'>{prospect.projected_value.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>

@@ -302,6 +302,10 @@ body {
     margin: 0 6rem;
 }
 
+.wip-page {
+    margin: 2rem 6rem 2rem 6rem;
+}
+
 .closed-page {
     margin: 2rem 6rem 4rem 6rem;
 }
@@ -559,7 +563,7 @@ hr {
 
 .prospect-settings-title {
     background-color: var(--secondary-color);
-    padding: 0 1rem;
+    padding: 0.5rem 1rem;
     border-radius: 5px;
 }
 
@@ -1040,7 +1044,8 @@ hr {
     }
 
     .dashboard-page,
-    .closed-page {
+    .closed-page,
+    .wip-page {
         margin: 0;
     }
 
@@ -1060,7 +1065,7 @@ hr {
     
     .prospect-settings-title {
         background-color: var(--secondary-color);
-        padding: 0.5rem 1rem;
+        padding: 1rem 1rem;
         border-radius: 5px;
     }
 
