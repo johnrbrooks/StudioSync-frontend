@@ -955,6 +955,13 @@ hr {
         width: 60%;
     }
 
+    .day-title {
+        text-align: center;
+    }
+
+    .day {
+        font-size: 0.9rem;
+    }
 }
 
 @media screen and (max-width: 1280px) {
